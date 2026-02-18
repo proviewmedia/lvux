@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LVUX — Full Brand & Social Media Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #231f20;
+    --white: #f5f5f0;
+    --red: #FF2D20;
+    --gold: #FFD100;
+    --teal: #00C9B1;
+    --surface: #141414;
+    --border: #1e1e1e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d0d0d; color: var(--white); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+
+  /* LOGO SVG sizing utility */
+  .logo-svg { display: inline-block; flex-shrink: 0; }
+  .logo-svg svg { display: block; }
+  .logo-svg.sz-xs  svg { width: 28px;  height: 28px; }
+  .logo-svg.sz-sm  svg { width: 40px;  height: 40px; }
+  .logo-svg.sz-md  svg { width: 60px;  height: 60px; }
+  .logo-svg.sz-lg  svg { width: 90px;  height: 90px; }
+  .logo-svg.sz-xl  svg { width: 120px; height: 120px; }
+  .logo-svg.sz-2xl svg { width: 160px; height: 160px; }
+  .logo-svg.sz-lockup svg { width: 52px; height: 52px; }
+
+  /* Full logo (icon + wordmark) */
+  .logo-full svg { display: block; }
+  .logo-full.sz-sm  svg { width: 180px; }
+  .logo-full.sz-md  svg { width: 260px; }
+  .logo-full.sz-lg  svg { width: 340px; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.96); backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1a1a1a;
+    padding: 0 40px;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto; white-space: nowrap;
+  }
+  .nav-brand {
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: 1rem; letter-spacing: 0.1em; color: var(--gold);
+    padding: 16px 20px 16px 0; margin-right: 20px;
+    border-right: 1px solid #222; flex-shrink: 0;
+  }
+  .nav a { color: #555; text-decoration: none; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 16px; flex-shrink: 0; transition: color 0.2s; }
+  .nav a:hover { color: var(--white); }
+
+  /* PAGE HEADER */
+  .page-header { padding: 80px 40px 60px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .page-header h1 { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9; text-transform: uppercase; letter-spacing: 0.02em; }
+  .page-header h1 em { color: var(--gold); font-style: normal; }
+  .page-header-right p { font-size: 0.8rem; color: #555; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.8; text-align: right; }
+
+  /* SECTION */
+  .section { padding: 70px 40px; border-bottom: 1px solid var(--border); }
+  .section-label { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #1e1e1e; }
+
+  /* LOGO SHOWCASE */
+  .logo-showcase { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .logo-variant { padding: 50px 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .lv-dark  { background: #111; }
+  .lv-white { background: var(--white); }
+  .lv-gold  { background: var(--gold); }
+  .logo-variant-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #555; }
+  .lv-white .logo-variant-label { color: #999; }
+  .lv-gold  .logo-variant-label { color: #7a6000; }
+
+  /* LOCKUP: icon + text side by side */
+  .lockup { display: inline-flex; align-items: center; gap: 14px; }
+  .lockup-text { display: flex; flex-direction: column; gap: 2px; }
+  .lockup-text span { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1.4rem; line-height: 1.1; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; display: block; }
+  .lv-dark  .lockup-text span { color: var(--white); }
+  .lv-white .lockup-text span { color: var(--black); }
+  .lv-gold  .lockup-text span { color: var(--black); }
+
+  /* PALETTE */
+  .palette-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .pal-swatch { padding: 30px 20px; min-height: 160px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .pal-name { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .pal-hex  { font-size: 0.7rem; opacity: 0.5; margin-top: 4px; letter-spacing: 0.08em; }
+
+  /* SOCIAL GRID */
+  .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; max-width: 1100px; margin: 0 auto; }
+
+  /* Mini logo row for social cards */
+  .mini-brand { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .mini-brand-text { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.6rem; letter-spacing: 0.14em; color: #666; text-transform: uppercase; }
+
+  /* Instagram Square Post */
+  .ig-sq { aspect-ratio: 1; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; background: var(--black); }
+  .ig-sq .blob { position: absolute; border-radius: 50%; pointer-events: none; }
+  .ig-headline { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2.1rem; line-height: 0.92; text-transform: uppercase; letter-spacing: 0.01em; }
+  .ig-sub { font-size: 0.72rem; color: #777; margin-top: 8px; letter-spacing: 0.09em; text-transform: uppercase; }
+  .ig-cta { display: inline-block; padding: 5px 12px; margin-top: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  .cta-gold    { background: var(--gold); color: var(--black); }
+  .cta-teal    { background: var(--teal); color: var(--black); }
+  .cta-red     { background: var(--red);  color: var(--white); }
+  .cta-outline { border: 1px solid #333;  color: #888; background: transparent; }
+
+  /* IG Story */
+  .ig-story { aspect-ratio: 0.5625; background: var(--black); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px; }
+  .story-ghost { position: absolute; font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 9rem; opacity: 0.04; pointer-events: none; top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; letter-spacing: -0.04em; }
+  .story-title { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2.4rem; line-height: 0.92; text-transform: uppercase; margin: 20px 0 8px; }
+  .story-eyebrow { font-size: 0.65rem; color: #555; letter-spacing: 0.15em; text-transform: uppercase; }
+  .story-pill { display: inline-block; padding: 8px 22px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 20px; }
+
+  /* LinkedIn Post */
+  .li-post { background: #f5f5f0; color: var(--black); padding: 32px; display: flex; flex-direction: column; gap: 16px; font-size: 0.85rem; line-height: 1.65; }
+  .li-post-header { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #ddd; padding-bottom: 16px; }
+  .li-avatar-wrap { width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--black); display: flex; align-items: center; justify-content: center; }
+  .li-profile-name { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1rem; color: var(--black); }
+  .li-profile-title { font-size: 0.72rem; color: #888; margin-top: 2px; }
+  .li-body { color: #222; }
+  .li-body strong { color: var(--black); }
+  .li-body .highlight { color: #0a66c2; font-weight: 600; }
+  .li-hashtags { font-size: 0.78rem; color: #0a66c2; line-height: 2; }
+  .li-engagement { display: flex; gap: 20px; font-size: 0.72rem; color: #999; border-top: 1px solid #ddd; padding-top: 12px; }
+
+  /* LinkedIn Banner */
+  .li-banner { background: var(--black); position: relative; overflow: hidden; display: flex; align-items: center; padding: 40px 50px; gap: 28px; min-height: 180px; }
+  .li-banner-glow { position: absolute; right: -60px; top: 50%; transform: translateY(-50%); width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, var(--gold) 0%, transparent 65%); opacity: 0.1; pointer-events: none; }
+  .li-banner-title { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2rem; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1; }
+  .li-banner-divider { width: 2px; height: 54px; background: #222; flex-shrink: 0; }
+  .li-banner-sub { font-size: 0.78rem; color: #666; letter-spacing: 0.09em; text-transform: uppercase; line-height: 1.7; }
+  .li-banner-sub strong { color: var(--gold); }
+
+  /* Carousel */
+  .carousel-wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .cc { background: var(--surface); padding: 28px; aspect-ratio: 1; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; border: 1px solid #1a1a1a; }
+  .cc-ghost { position: absolute; bottom: -16px; right: 8px; font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 7rem; opacity: 0.03; pointer-events: none; }
+  .cc-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cc-num { font-family: 'Poppins', sans-serif; font-size: 0.65rem; font-weight: 700; color: #333; letter-spacing: 0.15em; }
+  .cc-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid #2a2a2a; padding: 3px 7px; color: #444; }
+  .cc-heading { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; line-height: 1; margin-bottom: 8px; }
+  .cc-text { font-size: 0.75rem; color: #555; line-height: 1.6; }
+
+  /* Strategy */
+  .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .strat-card { background: var(--surface); padding: 40px; border: 1px solid #1a1a1a; }
+  .strat-platform { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1.8rem; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+  .strat-platform.ig { color: #c13584; }
+  .strat-platform.li { color: #0a66c2; }
+  .strat-eyebrow { font-size: 0.65rem; color: #444; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 24px; }
+  .strat-row { margin-bottom: 20px; }
+  .strat-key { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--teal); margin-bottom: 6px; }
+  .strat-val { font-size: 0.82rem; color: #888; line-height: 1.6; }
+  .strat-val strong { color: var(--white); font-weight: 600; }
+
+  /* Captions */
+  .caption-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .caption-card { background: var(--surface); padding: 32px; border: 1px solid #1a1a1a; }
+  .caption-type { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .caption-body { font-size: 0.82rem; line-height: 1.75; color: #999; }
+  .caption-body .fill { color: var(--white); font-style: italic; }
+  .caption-body .hashtag { color: #0a66c2; }
+
+  /* Calendar */
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .cal-day-header { background: #111; padding: 12px 8px; text-align: center; font-family: 'Poppins', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #444; }
+  .cal-cell { background: var(--surface); padding: 14px 12px; min-height: 80px; border: 1px solid #1a1a1a; }
+  .cal-date { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: #333; margin-bottom: 6px; }
+  .cal-task { font-size: 0.65rem; line-height: 1.5; color: #666; }
+  .cal-pill { display: inline-block; padding: 2px 6px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; border-radius: 2px; }
+  .cp-ig   { background: rgba(193,53,132,0.2); color: #c13584; }
+  .cp-li   { background: rgba(10,102,194,0.2); color: #4a9fd4; }
+  .cp-both { background: rgba(255,209,0,0.15); color: var(--gold); }
+
+  /* Hashtag bank */
+  .hashtag-bank { display: flex; flex-wrap: wrap; gap: 8px; max-width: 1100px; margin: 0 auto; }
+  .ht { padding: 7px 14px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; border: 1px solid #222; color: #666; cursor: default; transition: all 0.2s; }
+  .ht:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+  .ht.primary   { border-color: var(--gold); color: var(--gold); }
+  .ht.secondary { border-color: var(--teal); color: var(--teal); }
+
+  /* Steps */
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .step-card { background: var(--surface); padding: 36px 32px; border: 1px solid #1a1a1a; }
+  .step-num { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 3rem; color: #1e1e1e; line-height: 1; margin-bottom: 16px; }
+  .step-title { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .step-body { font-size: 0.8rem; color: #666; line-height: 1.65; }
+  .step-body strong { color: var(--white); }
+
+  /* TICKER */
+  .ticker { background: var(--gold); color: var(--black); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+  .ticker-inner { display: inline-flex; gap: 28px; animation: ticker 20s linear infinite; }
+  .ticker-inner span { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .ticker-dot { opacity: 0.35; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Tagline wall */
+  .tl-big { font-family: 'Poppins', sans-serif; font-weight: 900; text-transform: uppercase; line-height: 0.92; }
+
+  /* Footer */
+  .footer { padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1a1a1a; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1rem; letter-spacing: 0.1em; color: #2a2a2a; }
+  .footer-note { font-size: 0.7rem; color: #333; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  @media (max-width: 900px) {
+    .palette-grid { grid-template-columns: repeat(3, 1fr); }
+    .strategy-grid, .social-grid, .steps-grid, .caption-grid, .logo-showcase { grid-template-columns: 1fr; }
+    .carousel-wrap { grid-template-columns: repeat(2, 1fr); }
+    .cal-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Define the icon SVG as a reusable symbol -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="lvux-icon" viewBox="0 0 100.8 100.8">
+    <path fill="#231f20" d="M0,0h100.8v100.8H20.01c-11.05,0-20.01-8.97-20.01-20.01V0h0Z"/>
+    <path fill="#fff" d="M51.65,8.03h11.86l8.27,26.43,8.16-26.43h11.52l-13.64,36.73h-12.3l-13.87-36.73Z"/>
+    <path fill="#fff" d="M33.15,55.48h11.33v21.89c0,2.17-.34,4.22-1.01,6.14-.68,1.93-1.74,3.62-3.18,5.06s-2.96,2.46-4.55,3.04c-2.2.82-4.85,1.23-7.94,1.23-1.79,0-3.74-.13-5.85-.38s-3.88-.75-5.3-1.49-2.72-1.8-3.9-3.17-1.98-2.78-2.42-4.23c-.7-2.34-1.05-4.41-1.05-6.21v-21.89h11.33v22.4c0,2,.56,3.57,1.67,4.69,1.11,1.13,2.65,1.69,4.62,1.69s3.49-.56,4.6-1.67c1.11-1.11,1.67-2.68,1.67-4.72v-22.4Z"/>
+    <path fill="#fff" d="M52.74,55.79h12.5l6.5,11.3,6.33-11.3h12.38l-11.43,17.79,12.51,18.94h-12.75l-7.25-11.8-7.25,11.8h-12.68l12.67-19.14-11.52-17.59Z"/>
+    <path fill="#fff" d="M20.67,35.65V7.96h-11.35v36.73c11.68.04,23.37.09,35.05.13.02-3.09.04-6.18.05-9.27-7.92.03-15.84.06-23.75.09Z"/>
+  </symbol>
+</svg>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">LVUX</div>
+  <a href="#logo">Logo</a>
+  <a href="#colors">Colors</a>
+  <a href="#social">Social Templates</a>
+  <a href="#strategy">Strategy</a>
+  <a href="#captions">Captions</a>
+  <a href="#calendar">Calendar</a>
+  <a href="#hashtags">Hashtags</a>
+  <a href="#posting">How To Post</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div>
+    <h1>LVUX<br><em>Brand &</em><br>Social<br>Playbook</h1>
+  </div>
+  <div class="page-header-right">
+    <p>Las Vegas UX Meetup<br>Full Identity System<br>LinkedIn + Instagram<br>2026 Edition</p>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>#LVUX</span><span class="ticker-dot">◆</span>
+    <span>#LasVegasUX</span><span class="ticker-dot">◆</span>
+    <span>#UXMeetup</span><span class="ticker-dot">◆</span>
+    <span>#DesignLV</span><span class="ticker-dot">◆</span>
+    <span>#UXDesign</span><span class="ticker-dot">◆</span>
+    <span>#UXCommunity</span><span class="ticker-dot">◆</span>
+    <span>#ProductDesign</span><span class="ticker-dot">◆</span>
+    <span>#DesignThinking</span><span class="ticker-dot">◆</span>
+    <span>#LVUX</span><span class="ticker-dot">◆</span>
+    <span>#LasVegasUX</span><span class="ticker-dot">◆</span>
+    <span>#UXMeetup</span><span class="ticker-dot">◆</span>
+    <span>#DesignLV</span><span class="ticker-dot">◆</span>
+    <span>#UXDesign</span><span class="ticker-dot">◆</span>
+    <span>#UXCommunity</span><span class="ticker-dot">◆</span>
+    <span>#ProductDesign</span><span class="ticker-dot">◆</span>
+    <span>#DesignThinking</span><span class="ticker-dot">◆</span>
+  </div>
+</div>
+
+<!-- ═══ 01 LOGO SYSTEM ═══ -->
+<div class="section" id="logo">
+  <div class="section-label">01 — Logo System</div>
+  <div class="logo-showcase">
+
+    <!-- Dark bg -->
+    <div class="logo-variant lv-dark">
+      <div class="lockup">
+        <div class="logo-svg sz-lockup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg>
+        </div>
+        <div class="lockup-text">
+          <span>Las Vegas</span>
+          <span>UX Meetup</span>
+        </div>
+      </div>
+      <div class="logo-variant-label">Primary — Dark Background</div>
+    </div>
+
+    <!-- Light bg -->
+    <div class="logo-variant lv-white">
+      <div class="lockup">
+        <div class="logo-svg sz-lockup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg>
+        </div>
+        <div class="lockup-text">
+          <span>Las Vegas</span>
+          <span>UX Meetup</span>
+        </div>
+      </div>
+      <div class="logo-variant-label">Primary — Light Background</div>
+    </div>
+
+    <!-- Gold bg -->
+    <div class="logo-variant lv-gold">
+      <div class="lockup">
+        <div class="logo-svg sz-lockup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg>
+        </div>
+        <div class="lockup-text">
+          <span>Las Vegas</span>
+          <span>UX Meetup</span>
+        </div>
+      </div>
+      <div class="logo-variant-label">Accent — Gold Background</div>
+    </div>
+
+  </div>
+
+  <!-- Full logo with wordmark -->
+  <div style="max-width:1100px;margin:2px auto 0;background:#fff;padding:50px 60px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 376.85 100.8" style="width:100%;max-width:500px;display:block;">
+      <defs><style>.cls-1{fill:#231f20;}.cls-2{fill:#fff;}</style></defs>
+      <path class="cls-1" d="M122.69,34.52h10.76v6.34h-18.97V7.15h8.21v27.37Z"/>
+      <path class="cls-1" d="M158.38,34.91h-12.58l-2.02,5.96h-8.6l12.2-33.71h9.51l12.2,33.71h-8.69l-2.02-5.96ZM156.26,28.57l-4.18-12.34-4.13,12.34h8.31Z"/>
+      <path class="cls-1" d="M178.36,40c-1.95-.8-3.51-1.98-4.68-3.55s-1.79-3.46-1.85-5.67h8.74c.13,1.25.56,2.2,1.3,2.86.73.66,1.7.99,2.88.99s2.18-.28,2.88-.84c.7-.56,1.06-1.34,1.06-2.33,0-.83-.28-1.52-.84-2.07-.56-.54-1.25-.99-2.07-1.34-.82-.35-1.98-.75-3.48-1.2-2.18-.67-3.95-1.34-5.33-2.02-1.38-.67-2.56-1.67-3.55-2.98-.99-1.32-1.49-3.03-1.49-5.14,0-3.14,1.14-5.6,3.41-7.37,2.27-1.78,5.23-2.66,8.88-2.66s6.71.89,8.98,2.66c2.27,1.77,3.49,4.25,3.65,7.42h-8.89c-.06-1.09-.46-1.95-1.2-2.57-.74-.62-1.68-.94-2.84-.94-.99,0-1.79.26-2.4.79-.61.53-.91,1.29-.91,2.28,0,1.09.51,1.94,1.54,2.55,1.02.61,2.62,1.27,4.8,1.97,2.18.74,3.95,1.44,5.31,2.11,1.36.67,2.53,1.65,3.53,2.93.99,1.28,1.49,2.93,1.49,4.94s-.49,3.67-1.46,5.24c-.98,1.57-2.4,2.82-4.25,3.75-1.86.93-4.05,1.39-6.58,1.39s-4.67-.4-6.63-1.2Z"/>
+      <path class="cls-1" d="M244.15,7.15l-11.96,33.71h-10.28l-11.96-33.71h8.74l8.36,25.45,8.4-25.45h8.69Z"/>
+      <path class="cls-1" d="M255.78,13.73v6.82h11v6.34h-11v7.4h12.44v6.58h-20.65V7.15h20.65v6.58h-12.44Z"/>
+      <path class="cls-1" d="M295.93,17.81c-.61-1.12-1.48-1.98-2.61-2.57-1.14-.59-2.48-.89-4.01-.89-2.66,0-4.79.87-6.39,2.61-1.6,1.75-2.4,4.08-2.4,6.99,0,3.11.84,5.53,2.52,7.27,1.68,1.75,4,2.62,6.94,2.62,2.02,0,3.73-.51,5.12-1.54,1.39-1.02,2.41-2.5,3.05-4.42h-10.42v-6.05h17.87v7.63c-.61,2.05-1.64,3.95-3.1,5.72s-3.31,3.19-5.55,4.27c-2.24,1.09-4.77,1.64-7.59,1.64-3.33,0-6.3-.73-8.91-2.19s-4.64-3.48-6.1-6.08-2.18-5.55-2.18-8.88.73-6.3,2.18-8.91c1.46-2.61,3.48-4.64,6.08-6.1s5.55-2.18,8.88-2.18c4.03,0,7.44.97,10.21,2.93s4.6,4.66,5.5,8.12h-9.08Z"/>
+      <path class="cls-1" d="M331.13,34.91h-12.58l-2.02,5.96h-8.6l12.2-33.71h9.51l12.2,33.71h-8.69l-2.02-5.96ZM329.02,28.57l-4.18-12.34-4.13,12.34h8.31Z"/>
+      <path class="cls-1" d="M351.11,40c-1.95-.8-3.51-1.98-4.68-3.55s-1.79-3.46-1.85-5.67h8.74c.13,1.25.56,2.2,1.3,2.86.73.66,1.7.99,2.88.99s2.18-.28,2.88-.84c.7-.56,1.06-1.34,1.06-2.33,0-.83-.28-1.52-.84-2.07-.56-.54-1.25-.99-2.07-1.34-.82-.35-1.98-.75-3.48-1.2-2.18-.67-3.95-1.34-5.33-2.02-1.38-.67-2.56-1.67-3.55-2.98-.99-1.32-1.49-3.03-1.49-5.14,0-3.14,1.14-5.6,3.41-7.37,2.27-1.78,5.23-2.66,8.88-2.66s6.71.89,8.98,2.66c2.27,1.77,3.49,4.25,3.65,7.42h-8.89c-.06-1.09-.46-1.95-1.2-2.57-.74-.62-1.68-.94-2.84-.94-.99,0-1.79.26-2.4.79-.61.53-.91,1.29-.91,2.28,0,1.09.51,1.94,1.54,2.55,1.02.61,2.62,1.27,4.8,1.97,2.18.74,3.95,1.44,5.31,2.11,1.36.67,2.53,1.65,3.53,2.93.99,1.28,1.49,2.93,1.49,4.94s-.49,3.67-1.46,5.24c-.98,1.57-2.4,2.82-4.25,3.75-1.86.93-4.05,1.39-6.58,1.39s-4.67-.4-6.63-1.2Z"/>
+      <path class="cls-1" d="M122.55,56.08v20.17c0,2.02.5,3.57,1.49,4.66.99,1.09,2.45,1.63,4.37,1.63s3.4-.54,4.42-1.63c1.03-1.09,1.54-2.64,1.54-4.66v-20.17h8.21v20.12c0,3.01-.64,5.56-1.92,7.64-1.28,2.08-3,3.65-5.16,4.71-2.16,1.06-4.57,1.59-7.23,1.59s-5.04-.52-7.13-1.56-3.75-2.61-4.97-4.71c-1.22-2.1-1.82-4.65-1.82-7.66v-20.12h8.21Z"/>
+      <path class="cls-1" d="M168.99,89.79l-6.87-10.33-6.05,10.33h-9.32l10.8-17.15-11.05-16.57h9.56l6.77,10.18,5.96-10.18h9.32l-10.71,17,11.14,16.71h-9.56Z"/>
+      <path class="cls-1" d="M231.04,56.08v33.71h-8.21v-20.22l-7.54,20.22h-6.63l-7.59-20.27v20.27h-8.21v-33.71h9.7l9.46,23.34,9.36-23.34h9.66Z"/>
+      <path class="cls-1" d="M245.16,62.66v6.82h11v6.34h-11v7.4h12.44v6.58h-20.65v-33.71h20.65v6.58h-12.44Z"/>
+      <path class="cls-1" d="M271.14,62.66v6.82h11v6.34h-11v7.4h12.44v6.58h-20.65v-33.71h20.65v6.58h-12.44Z"/>
+      <path class="cls-1" d="M313.17,56.08v6.58h-8.93v27.14h-8.21v-27.14h-8.93v-6.58h26.08Z"/>
+      <path class="cls-1" d="M325.37,56.08v20.17c0,2.02.5,3.57,1.49,4.66.99,1.09,2.45,1.63,4.37,1.63s3.4-.54,4.42-1.63c1.03-1.09,1.54-2.64,1.54-4.66v-20.17h8.21v20.12c0,3.01-.64,5.56-1.92,7.64-1.28,2.08-3,3.65-5.16,4.71-2.16,1.06-4.57,1.59-7.23,1.59s-5.04-.52-7.13-1.56-3.75-2.61-4.97-4.71c-1.22-2.1-1.82-4.65-1.82-7.66v-20.12h8.21Z"/>
+      <path class="cls-1" d="M375.51,72.29c-.9,1.62-2.28,2.92-4.13,3.91-1.86.99-4.16,1.49-6.92,1.49h-5.09v12.1h-8.21v-33.71h13.31c2.69,0,4.96.46,6.82,1.39,1.85.93,3.25,2.21,4.18,3.84.93,1.63,1.39,3.51,1.39,5.62,0,1.95-.45,3.74-1.34,5.35ZM367.34,70.05c.77-.73,1.15-1.77,1.15-3.12s-.38-2.38-1.15-3.12c-.77-.73-1.94-1.1-3.51-1.1h-4.46v8.45h4.46c1.57,0,2.74-.37,3.51-1.11Z"/>
+      <path class="cls-1" d="M0,0h100.8v100.8H20.01c-11.05,0-20.01-8.97-20.01-20.01V0h0Z"/>
+      <path class="cls-2" d="M51.65,8.03h11.86l8.27,26.43,8.16-26.43h11.52l-13.64,36.73h-12.3l-13.87-36.73Z"/>
+      <path class="cls-2" d="M33.15,55.48h11.33v21.89c0,2.17-.34,4.22-1.01,6.14-.68,1.93-1.74,3.62-3.18,5.06s-2.96,2.46-4.55,3.04c-2.2.82-4.85,1.23-7.94,1.23-1.79,0-3.74-.13-5.85-.38s-3.88-.75-5.3-1.49-2.72-1.8-3.9-3.17-1.98-2.78-2.42-4.23c-.7-2.34-1.05-4.41-1.05-6.21v-21.89h11.33v22.4c0,2,.56,3.57,1.67,4.69,1.11,1.13,2.65,1.69,4.62,1.69s3.49-.56,4.6-1.67c1.11-1.11,1.67-2.68,1.67-4.72v-22.4Z"/>
+      <path class="cls-2" d="M52.74,55.79h12.5l6.5,11.3,6.33-11.3h12.38l-11.43,17.79,12.51,18.94h-12.75l-7.25-11.8-7.25,11.8h-12.68l12.67-19.14-11.52-17.59Z"/>
+      <path class="cls-2" d="M20.67,35.65V7.96h-11.35v36.73c11.68.04,23.37.09,35.05.13.02-3.09.04-6.18.05-9.27-7.92.03-15.84.06-23.75.09Z"/>
+    </svg>
+    <div style="font-size:0.65rem;color:#aaa;letter-spacing:0.15em;text-transform:uppercase;margin-top:16px;">Primary Full Lockup — Use on White/Light Backgrounds</div>
+  </div>
+
+  <!-- Scale strip -->
+  <div style="max-width:1100px;margin:2px auto 0;background:#141414;padding:40px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;border:1px solid #1a1a1a;">
+    <div style="font-size:0.65rem;color:#333;letter-spacing:0.15em;text-transform:uppercase;writing-mode:vertical-lr;">Scale</div>
+    <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div class="logo-svg sz-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div class="logo-svg sz-md"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div class="logo-svg sz-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div class="logo-svg sz-xl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div style="font-size:0.7rem;color:#444;line-height:2.2;">28px · Favicon/Profile<br>40px · App Icon<br>60px · Card Header<br>90px · Hero Banner<br>120px · Print / Large Format</div>
+  </div>
+</div>
+
+<!-- ═══ 02 COLOR PALETTE ═══ -->
+<div class="section" id="colors">
+  <div class="section-label">02 — Color Palette</div>
+  <div class="palette-grid">
+    <div class="pal-swatch" style="background:#231f20;"><div class="pal-name">Obsidian</div><div class="pal-hex">#231F20 · Primary</div></div>
+    <div class="pal-swatch" style="background:#f5f5f0;"><div class="pal-name" style="color:#111">Chalk</div><div class="pal-hex" style="color:#111">#F5F5F0 · Background</div></div>
+    <div class="pal-swatch" style="background:var(--gold);"><div class="pal-name" style="color:#111">Vegas Gold</div><div class="pal-hex" style="color:#111">#FFD100 · Accent 01</div></div>
+    <div class="pal-swatch" style="background:var(--teal);"><div class="pal-name" style="color:#111">Electric Teal</div><div class="pal-hex" style="color:#111">#00C9B1 · Accent 02</div></div>
+    <div class="pal-swatch" style="background:var(--red);"><div class="pal-name">Neon Red</div><div class="pal-hex">#FF2D20 · CTA</div></div>
+    <div class="pal-swatch" style="background:#141414;"><div class="pal-name">Charcoal</div><div class="pal-hex">#141414 · Surface</div></div>
+  </div>
+</div>
+
+<!-- ═══ 03 INSTAGRAM TEMPLATES ═══ -->
+<div class="section" id="social">
+  <div class="section-label">03 — Instagram Templates</div>
+  <div class="social-grid">
+
+    <!-- Post 1: Event -->
+    <div class="ig-sq">
+      <div class="blob" style="width:260px;height:260px;top:-80px;right:-80px;background:var(--gold);opacity:0.06;"></div>
+      <div class="mini-brand">
+        <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <span class="mini-brand-text">@lvux.design</span>
+      </div>
+      <div class="ig-headline">Monthly<br>Meetup<br><span style="color:var(--gold)">March</span></div>
+      <div class="ig-sub">Thu Mar 20 · 6:30 PM · Downtown LV</div>
+      <div class="ig-cta cta-gold">RSVP Free — Link in Bio →</div>
+    </div>
+
+    <!-- Post 2: Portfolio Night -->
+    <div class="ig-sq">
+      <div class="blob" style="width:300px;height:300px;bottom:-80px;left:-80px;background:var(--teal);opacity:0.07;"></div>
+      <div class="mini-brand">
+        <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <span class="mini-brand-text">@lvux.design</span>
+      </div>
+      <div class="ig-headline">Portfolio<br>Night<br><span style="color:var(--teal)">Vol. 7</span></div>
+      <div class="ig-sub">Present · Critique · Connect</div>
+      <div class="ig-cta cta-teal">Submit Your Case Study →</div>
+    </div>
+
+    <!-- Post 3: Speaker -->
+    <div class="ig-sq">
+      <div class="blob" style="width:220px;height:220px;top:40%;left:50%;transform:translate(-50%,-50%);background:var(--red);opacity:0.08;"></div>
+      <div class="mini-brand">
+        <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <span class="mini-brand-text">Speaker Spotlight</span>
+      </div>
+      <div class="ig-headline">Featured<br>Speaker</div>
+      <div class="ig-sub">#LVUX Community Talk</div>
+      <div class="ig-cta cta-red">Watch the Recap →</div>
+    </div>
+
+    <!-- Post 4: Quote -->
+    <div class="ig-sq" style="background:#141414;border:1px solid #1a1a1a;">
+      <div class="blob" style="width:280px;height:280px;top:-60px;left:-60px;background:var(--gold);opacity:0.04;"></div>
+      <div class="mini-brand">
+        <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <span class="mini-brand-text">UX Tip</span>
+      </div>
+      <div style="font-family:'Poppins', sans-serif;font-size:1.8rem;font-weight:900;line-height:0.95;text-transform:uppercase;">"Test early.<br>Fail cheap.<br><span style="color:var(--gold)">Win often."</span></div>
+      <div class="ig-sub">UX Principle #12 · #LVUX</div>
+    </div>
+
+    <!-- Post 5: Stats -->
+    <div class="ig-sq" style="background:var(--gold);">
+      <div class="mini-brand" style="margin-bottom:12px;">
+        <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <span class="mini-brand-text" style="color:#5a4a00;">@lvux.design</span>
+      </div>
+      <div style="font-family:'Poppins', sans-serif;font-weight:900;font-size:4rem;line-height:0.85;color:#000;text-transform:uppercase;">400+<br>Members</div>
+      <div style="font-size:0.72rem;color:#7a6200;margin-top:8px;letter-spacing:0.1em;text-transform:uppercase;">And growing · Las Vegas, NV</div>
+    </div>
+
+    <!-- Post 6: Recap -->
+    <div class="ig-sq" style="background:#0d0d0d;border:1px solid #1a1a1a;">
+      <div class="blob" style="width:250px;height:250px;bottom:-60px;right:-60px;background:var(--teal);opacity:0.06;"></div>
+      <div class="mini-brand">
+        <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <span class="mini-brand-text">Monthly Recap</span>
+      </div>
+      <div class="ig-headline">Feb<br>Meetup<br><span style="color:var(--teal)">Recap ✓</span></div>
+      <div class="ig-sub">Thanks to everyone who showed up!</div>
+      <div class="ig-cta cta-outline">See Highlights →</div>
+    </div>
+
+  </div>
+
+  <!-- Story + LinkedIn Banner row -->
+  <div style="max-width:1100px;margin:3px auto 0;display:grid;grid-template-columns:1fr 2fr;gap:3px;">
+    <div class="ig-story">
+      <div class="story-ghost">LVUX</div>
+      <div class="logo-svg sz-md"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+      <div class="story-eyebrow" style="margin-top:20px;">Las Vegas, NV</div>
+      <div class="story-title">You're<br>Invited</div>
+      <div class="story-eyebrow">Free Monthly Meetup</div>
+      <div class="story-pill cta-gold">RSVP Now</div>
+    </div>
+    <div class="li-banner">
+      <div class="li-banner-glow"></div>
+      <div class="logo-svg sz-xl" style="flex-shrink:0;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+      <div class="li-banner-divider"></div>
+      <div>
+        <div class="li-banner-title">Las Vegas UX Meetup</div>
+        <div style="height:8px;"></div>
+        <div class="li-banner-sub"><strong>Free community</strong> for UX designers,<br>researchers & product thinkers.<br><strong>Meet. Learn. Build.</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 04 LINKEDIN TEMPLATES ═══ -->
+<div class="section">
+  <div class="section-label">04 — LinkedIn Post Templates</div>
+  <div class="strategy-grid">
+
+    <div class="li-post">
+      <div class="li-post-header">
+        <div class="li-avatar-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8" width="46" height="46"><use href="#lvux-icon"/></svg>
+        </div>
+        <div>
+          <div class="li-profile-name">LVUX — Las Vegas UX Meetup</div>
+          <div class="li-profile-title">Design Community · Las Vegas, NV · 400+ Members</div>
+        </div>
+      </div>
+      <div class="li-body">
+        <strong>📍 Our next LVUX meetup is coming up — and you're invited.</strong><br><br>
+        Whether you're a <span class="highlight">seasoned UX lead</span> or just starting your design journey, LVUX is your home base for connecting with the growing design community right here in Las Vegas.<br><br>
+        <strong>This month:</strong><br>
+        ▸ Lightning talks from local designers<br>
+        ▸ Portfolio review open session<br>
+        ▸ Networking + free pizza<br><br>
+        <strong>📅 Thursday, March 20 · 6:30 PM</strong><br>
+        <strong>📍 Downtown Las Vegas</strong><br>
+        <strong>🎟 Free — RSVP link in comments</strong><br><br>
+        If you know a designer in Vegas — tag them below. 👇
+      </div>
+      <div class="li-hashtags">#LVUX #UXDesign #LasVegasUX #UXMeetup #DesignCommunity #ProductDesign</div>
+      <div class="li-engagement"><span>👍 Like</span><span>💬 Comment</span><span>↗ Repost</span><span>📤 Send</span></div>
+    </div>
+
+    <div class="li-post">
+      <div class="li-post-header">
+        <div class="li-avatar-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8" width="46" height="46"><use href="#lvux-icon"/></svg>
+        </div>
+        <div>
+          <div class="li-profile-name">LVUX — Las Vegas UX Meetup</div>
+          <div class="li-profile-title">Design Community · Las Vegas, NV · 400+ Members</div>
+        </div>
+      </div>
+      <div class="li-body">
+        <strong>Hot take: Las Vegas doesn't get enough credit as a design city.</strong><br><br>
+        We run one of the most hospitality-driven, experience-obsessed economies in the world. Every casino floor, resort app, digital kiosk, and loyalty program is a UX problem at scale.<br><br>
+        The talent is here.<br>
+        The problems are here.<br>
+        The community is growing.<br><br>
+        That's why we built <span class="highlight">LVUX</span> — a free monthly meetup for designers, researchers, and product thinkers right here in the valley.<br><br>
+        <strong>What's your biggest UX challenge in Las Vegas right now?</strong> Drop it in the comments. 👇
+      </div>
+      <div class="li-hashtags">#LVUX #LasVegasUX #UXDesign #DesignLeadership #ProductDesign #DesignThinking</div>
+      <div class="li-engagement"><span>👍 Like</span><span>💬 Comment</span><span>↗ Repost</span><span>📤 Send</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ 05 STRATEGY ═══ -->
+<div class="section" id="strategy">
+  <div class="section-label">05 — Platform Strategy</div>
+  <div class="strategy-grid">
+    <div class="strat-card">
+      <div class="strat-platform ig">Instagram</div>
+      <div class="strat-eyebrow">@lvux.design · Visual Community Hub</div>
+      <div class="strat-row"><div class="strat-key">Posting Frequency</div><div class="strat-val"><strong>4–5×/week</strong> — 3 feed posts + 2 stories. Reels when you have event video.</div></div>
+      <div class="strat-row"><div class="strat-key">Best Times to Post</div><div class="strat-val"><strong>Tue–Thu, 11AM–1PM</strong> or <strong>6–8PM PT</strong>. Avoid Mondays and Sunday mornings.</div></div>
+      <div class="strat-row"><div class="strat-key">Content Mix</div><div class="strat-val"><strong>40%</strong> Events & recaps · <strong>30%</strong> UX tips & carousels · <strong>20%</strong> Community spotlights · <strong>10%</strong> Relatable/memes</div></div>
+      <div class="strat-row"><div class="strat-key">Stories Strategy</div><div class="strat-val">Countdown stickers pre-event. Polls ("Which topic next?"). Q&A boxes. Behind-the-scenes setup.</div></div>
+      <div class="strat-row"><div class="strat-key">Bio Setup</div><div class="strat-val">🖥 Free UX community · Las Vegas NV<br>📅 Monthly meetups + workshops<br>🔗 linktr.ee/lvux</div></div>
+      <div class="strat-row"><div class="strat-key">Hashtags Per Post</div><div class="strat-val"><strong>10–15 in first comment</strong> (not caption). Mix: 3 branded + 4 niche + 4 broader + 2 local.</div></div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-platform li">LinkedIn</div>
+      <div class="strat-eyebrow">LVUX Las Vegas UX Meetup · Professional Network</div>
+      <div class="strat-row"><div class="strat-key">Posting Frequency</div><div class="strat-val"><strong>3–4×/week</strong> — quality over quantity. LinkedIn rewards dwell time, not volume.</div></div>
+      <div class="strat-row"><div class="strat-key">Best Times to Post</div><div class="strat-val"><strong>Tue–Thu, 7–9AM PT</strong> or <strong>12–1PM</strong>. Tuesday morning is the single highest-engagement slot.</div></div>
+      <div class="strat-row"><div class="strat-key">Content Mix</div><div class="strat-val"><strong>40%</strong> Thought leadership · <strong>30%</strong> Event announcements · <strong>20%</strong> Community stories · <strong>10%</strong> Industry commentary</div></div>
+      <div class="strat-row"><div class="strat-key">Post Format Tips</div><div class="strat-val">Open with a <strong>bold first line</strong>. Use line breaks every 1–2 sentences. End every post with a direct question.</div></div>
+      <div class="strat-row"><div class="strat-key">Page Setup</div><div class="strat-val">Upload LinkedIn banner (1584×396px). Complete all sections. Link to Meetup.com RSVP page.</div></div>
+      <div class="strat-row"><div class="strat-key">Hashtags Per Post</div><div class="strat-val"><strong>3–5 hashtags max</strong> in caption. Always include <strong>#LVUX</strong> and <strong>#UXDesign</strong>.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 06 CAPTIONS ═══ -->
+<div class="section" id="captions">
+  <div class="section-label">06 — Caption Templates (Copy & Customize)</div>
+  <div class="caption-grid">
+    <div class="caption-card">
+      <div class="caption-type">📅 Event Announcement — Instagram</div>
+      <div class="caption-body">
+        ✦ <span class="fill">LVUX March Meetup</span> is officially on the books.<br><br>
+        Join us <span class="fill">Thursday, March 20 at 6:30PM</span> for talks, networking, and real design conversation — right here in Las Vegas.<br><br>
+        🗣 <span class="fill">[Speaker]</span> will be talking about <span class="fill">[topic]</span><br>
+        🖼 Open portfolio reviews · 🍕 Free food<br><br>
+        Spots are limited. Link in bio to RSVP free. 👆<br><br>
+        <span class="hashtag">#LVUX #LasVegasUX #UXMeetup #DesignLV #UXDesign #UXCommunity</span>
+      </div>
+    </div>
+    <div class="caption-card">
+      <div class="caption-type">💼 Event Announcement — LinkedIn</div>
+      <div class="caption-body">
+        <span class="fill">March LVUX Meetup</span> — mark your calendar.<br><br>
+        If you're a UX designer, researcher, or product thinker in the Las Vegas valley, this is your crew.<br><br>
+        We're gathering <span class="fill">Thursday, March 20 at 6:30PM</span> for:<br>
+        ▸ Lightning talks from local design voices<br>
+        ▸ Portfolio review open session<br>
+        ▸ Real talk about the LV design scene<br><br>
+        It's free. Community-run. And it keeps getting better.<br><br>
+        🔗 RSVP in the comments. Tag a designer in Vegas. 👇<br><br>
+        <span class="hashtag">#LVUX #UXDesign #LasVegasUX #DesignCommunity</span>
+      </div>
+    </div>
+    <div class="caption-card">
+      <div class="caption-type">📸 Post-Event Recap — Instagram</div>
+      <div class="caption-body">
+        Last night was 🔥<br><br>
+        <span class="fill">February's</span> LVUX meetup brought out <span class="fill">X+ designers</span>, some incredible presentations, and conversations we didn't want to end.<br><br>
+        Big thank you to <span class="fill">@speaker</span> for sharing your work on <span class="fill">[topic]</span>.<br><br>
+        Next meetup: <span class="fill">March 20</span>. Link in bio.<br><br>
+        <span class="hashtag">#LVUX #LasVegasUX #UXDesign #UXMeetup #DesignCommunity</span>
+      </div>
+    </div>
+    <div class="caption-card">
+      <div class="caption-type">🔥 Thought Leadership — LinkedIn</div>
+      <div class="caption-body">
+        Nobody talks about Las Vegas as a UX city. They should.<br><br>
+        Our entire economy runs on experience design. Every resort, casino floor, loyalty app, and tourism platform is a UX problem at scale — and the people solving them are right here.<br><br>
+        We started <span class="fill">LVUX</span> because the design talent in this city deserves a community that reflects that.<br><br>
+        What problem are you solving right now?<br><br>
+        <span class="hashtag">#LVUX #UXDesign #LasVegasUX #DesignLeadership</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 07 CAROUSEL ═══ -->
+<div class="section">
+  <div class="section-label">07 — Educational Carousel — "5 UX Laws Every Designer Should Know"</div>
+  <div class="carousel-wrap">
+    <div class="cc" data-num="1">
+      <div class="cc-top"><div class="cc-num">SLIDE 01</div><div class="cc-tag">#LVUX</div></div>
+      <div><div class="cc-heading">5 UX Laws<br>Every Designer<br><span style="color:var(--gold)">Must Know</span></div><div class="cc-text">Swipe through to level up your design thinking. Save for your next project. →</div></div>
+      <div class="cc-ghost">01</div>
+    </div>
+    <div class="cc">
+      <div class="cc-top"><div class="cc-num">SLIDE 02</div><div class="cc-tag">Hick's Law</div></div>
+      <div><div class="cc-heading"><span style="color:var(--teal)">Fewer</span><br>choices =<br>faster decisions</div><div class="cc-text">The more options you give users, the longer they take to decide. Simplify navigation. Reduce form fields. Less is more.</div></div>
+      <div class="cc-ghost">02</div>
+    </div>
+    <div class="cc">
+      <div class="cc-top"><div class="cc-num">SLIDE 03</div><div class="cc-tag">Fitts's Law</div></div>
+      <div><div class="cc-heading">Big targets<br>= <span style="color:var(--gold)">easy</span><br>to tap</div><div class="cc-text">Touch targets should be at least 44×44px. Put important buttons where thumbs naturally reach.</div></div>
+      <div class="cc-ghost">03</div>
+    </div>
+    <div class="cc">
+      <div class="cc-top"><div class="cc-num">SLIDE 04</div><div class="cc-tag">Jakob's Law</div></div>
+      <div><div class="cc-heading">Design<br>what they<br><span style="color:var(--red)">expect</span></div><div class="cc-text">Users spend most of their time on other sites. Familiar design patterns reduce cognitive load and build confidence.</div></div>
+      <div class="cc-ghost">04</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 08 CALENDAR ═══ -->
+<div class="section" id="calendar">
+  <div class="section-label">08 — Monthly Content Calendar Template</div>
+  <div class="cal-grid">
+    <div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div><div class="cal-day-header">Sun</div>
+    <div class="cal-cell"><div class="cal-date">1</div><div class="cal-pill cp-li">LinkedIn</div><div class="cal-task">Thought leadership: "UX in Vegas"</div></div>
+    <div class="cal-cell"><div class="cal-date">2</div><div class="cal-pill cp-both">Both</div><div class="cal-task">Event announcement — first drop</div></div>
+    <div class="cal-cell"><div class="cal-date">3</div><div class="cal-pill cp-ig">IG</div><div class="cal-task">UX tip carousel (5 slides)</div></div>
+    <div class="cal-cell"><div class="cal-date">4</div><div class="cal-pill cp-li">LinkedIn</div><div class="cal-task">Speaker spotlight post</div></div>
+    <div class="cal-cell"><div class="cal-date">5</div><div class="cal-pill cp-ig">IG</div><div class="cal-task">Community quote or meme</div></div>
+    <div class="cal-cell"><div class="cal-date">6</div><div class="cal-task" style="color:#2a2a2a;">—</div></div>
+    <div class="cal-cell"><div class="cal-date">7</div><div class="cal-task" style="color:#2a2a2a;">—</div></div>
+    <div class="cal-cell"><div class="cal-date">8</div><div class="cal-pill cp-ig">IG</div><div class="cal-task">Portfolio night promo</div></div>
+    <div class="cal-cell"><div class="cal-date">9</div><div class="cal-pill cp-both">Both</div><div class="cal-task">Event reminder — 2 weeks out</div></div>
+    <div class="cal-cell"><div class="cal-date">10</div><div class="cal-pill cp-li">LinkedIn</div><div class="cal-task">Industry news commentary</div></div>
+    <div class="cal-cell"><div class="cal-date">11</div><div class="cal-pill cp-ig">IG</div><div class="cal-task">Member spotlight / behind scenes</div></div>
+    <div class="cal-cell"><div class="cal-date">12</div><div class="cal-pill cp-both">Both</div><div class="cal-task">UX case study / before & after</div></div>
+    <div class="cal-cell"><div class="cal-date">13</div><div class="cal-task" style="color:#2a2a2a;">—</div></div>
+    <div class="cal-cell"><div class="cal-date">14</div><div class="cal-task" style="color:#2a2a2a;">—</div></div>
+    <div class="cal-cell" style="border-color:#FFD10033;"><div class="cal-date" style="color:var(--gold);">15</div><div class="cal-pill cp-both">Both</div><div class="cal-task">Event week! Countdown — 5 days</div></div>
+    <div class="cal-cell" style="border-color:#FFD10033;"><div class="cal-date" style="color:var(--gold);">16</div><div class="cal-pill cp-ig">IG</div><div class="cal-task">Story countdown sticker activated</div></div>
+    <div class="cal-cell" style="border-color:#FFD10033;"><div class="cal-date" style="color:var(--gold);">17</div><div class="cal-pill cp-li">LinkedIn</div><div class="cal-task">Final speaker preview post</div></div>
+    <div class="cal-cell" style="border:2px solid var(--gold);"><div class="cal-date" style="color:var(--gold);font-size:1.2rem;">18 ★</div><div class="cal-pill cp-both">EVENT</div><div class="cal-task" style="color:var(--gold);">MEETUP NIGHT — post live stories</div></div>
+    <div class="cal-cell" style="border-color:#FFD10033;"><div class="cal-date" style="color:var(--gold);">19</div><div class="cal-pill cp-both">Both</div><div class="cal-task">Post-event recap + thank you</div></div>
+    <div class="cal-cell"><div class="cal-date">20</div><div class="cal-pill cp-ig">IG</div><div class="cal-task">Photo dump from event</div></div>
+    <div class="cal-cell"><div class="cal-date">21</div><div class="cal-task" style="color:#2a2a2a;">—</div></div>
+  </div>
+</div>
+
+<!-- ═══ 09 HASHTAGS ═══ -->
+<div class="section" id="hashtags">
+  <div class="section-label">09 — Hashtag Bank</div>
+  <div class="hashtag-bank">
+    <div class="ht primary">#LVUX</div><div class="ht primary">#LasVegasUX</div><div class="ht primary">#lvuxdesign</div>
+    <div class="ht secondary">#UXDesign</div><div class="ht secondary">#UXResearch</div><div class="ht secondary">#UXMeetup</div><div class="ht secondary">#UXCommunity</div><div class="ht secondary">#UserExperience</div>
+    <div class="ht">#ProductDesign</div><div class="ht">#DesignThinking</div><div class="ht">#InteractionDesign</div><div class="ht">#UIDesign</div><div class="ht">#DesignSystems</div>
+    <div class="ht">#HumanCenteredDesign</div><div class="ht">#DesignLV</div><div class="ht">#LasVegas</div><div class="ht">#VegasTech</div>
+    <div class="ht">#DesignCommunity</div><div class="ht">#DesignMeetup</div><div class="ht">#PortfolioReview</div><div class="ht">#DesignCareer</div><div class="ht">#FigmaDesign</div>
+  </div>
+</div>
+
+<!-- ═══ 10 HOW TO POST ═══ -->
+<div class="section" id="posting">
+  <div class="section-label">10 — How To Post: Step-by-Step</div>
+
+  <div style="max-width:1100px;margin:0 auto 3px;background:rgba(10,102,194,0.08);border:1px solid rgba(10,102,194,0.2);padding:20px 24px;font-family:'Poppins', sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;color:#4a9fd4;">
+    📘 LinkedIn — Step by Step
+  </div>
+  <div class="steps-grid" style="margin-bottom:3px;">
+    <div class="step-card"><div class="step-num">01</div><div class="step-title">Prep Your Asset</div><div class="step-body">Export at <strong>1200×1200px (square)</strong> or <strong>1200×628px (landscape)</strong>. LinkedIn boosts image posts significantly. PNG preferred, max 5MB.</div></div>
+    <div class="step-card"><div class="step-num">02</div><div class="step-title">Write the Copy</div><div class="step-body"><strong>Bold your first sentence</strong> — only 2–3 lines show before "see more." Put the most important info up top. End with a direct question.</div></div>
+    <div class="step-card"><div class="step-num">03</div><div class="step-title">Add Hashtags</div><div class="step-body"><strong>3–5 hashtags max</strong> in body. Always include <strong>#LVUX, #UXDesign, #LasVegasUX</strong>. Too many hashtags hurt reach on LinkedIn.</div></div>
+    <div class="step-card"><div class="step-num">04</div><div class="step-title">Schedule It</div><div class="step-body">Use <strong>Buffer, Later, or LinkedIn's native scheduler</strong>. Best windows: <strong>Tue–Thu, 7–9AM PT</strong>.</div></div>
+    <div class="step-card"><div class="step-num">05</div><div class="step-title">Engage Early</div><div class="step-body">Reply to every comment within <strong>the first 2 hours</strong>. Early engagement tells the algorithm to amplify the post.</div></div>
+    <div class="step-card"><div class="step-num">06</div><div class="step-title">Track Results</div><div class="step-body">Check <strong>Impressions, CTR, and Follower growth</strong> weekly. Double down on formats hitting 500+ impressions.</div></div>
+  </div>
+
+  <div style="max-width:1100px;margin:16px auto 3px;background:rgba(193,53,132,0.08);border:1px solid rgba(193,53,132,0.2);padding:20px 24px;font-family:'Poppins', sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;color:#c13584;">
+    📸 Instagram — Step by Step
+  </div>
+  <div class="steps-grid">
+    <div class="step-card"><div class="step-num">01</div><div class="step-title">Pick Your Format</div><div class="step-body"><strong>Feed post:</strong> 1080×1080px. <strong>Carousel:</strong> up to 10 slides. <strong>Story:</strong> 1080×1920px. Always export at 2× resolution.</div></div>
+    <div class="step-card"><div class="step-num">02</div><div class="step-title">Caption Formula</div><div class="step-body"><strong>Line 1:</strong> Hook. <strong>Lines 2–4:</strong> Value/info. <strong>Line 5:</strong> CTA — "Save this," "Link in bio," "Tag a friend." Keep under 125 chars before the fold.</div></div>
+    <div class="step-card"><div class="step-num">03</div><div class="step-title">Hashtags in Comment</div><div class="step-body">Post <strong>10–15 hashtags in the first comment</strong> immediately after publishing. Keeps captions clean while getting discovery.</div></div>
+    <div class="step-card"><div class="step-num">04</div><div class="step-title">Add Location Tag</div><div class="step-body">Always tag <strong>Las Vegas, Nevada</strong>. For event posts, tag the specific venue. Location tags boost local discovery.</div></div>
+    <div class="step-card"><div class="step-num">05</div><div class="step-title">Stories: 24-hr Cycle</div><div class="step-body">Post 2–4 stories/day when promoting events: <strong>Countdown sticker → Poll → Behind-the-scenes → Link sticker</strong>. Save event stories to a Highlight.</div></div>
+    <div class="step-card"><div class="step-num">06</div><div class="step-title">Reels for Reach</div><div class="step-body">Film a <strong>30–60 sec event recap Reel</strong> after each meetup. Add trending audio. Use on-screen text — most watch without sound. Reels get 2–3× organic reach.</div></div>
+  </div>
+</div>
+
+<!-- TAGLINE WALL -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">11 — Brand Voice & Taglines</div>
+  <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:6px;">
+    <div class="tl-big" style="font-size:clamp(3rem,9vw,8rem);color:#666666;">DESIGN IS ALIVE</div>
+    <div class="tl-big" style="font-size:clamp(3rem,9vw,8rem);color:var(--gold);">IN LAS VEGAS.</div>
+    <div style="height:20px;"></div>
+    <div class="tl-big" style="font-size:clamp(2rem,6vw,5rem);color:#5a5a5a;">Where UX meets the Strip.</div>
+    <div class="tl-big" style="font-size:clamp(2rem,6vw,5rem);color:#505050;">Connect. Create. Critique.</div>
+    <div class="tl-big" style="font-size:clamp(1.5rem,4vw,3.5rem);color:#464646;">Built by designers, for designers.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="logo-svg sz-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+  <div class="footer-brand">LVUX — LAS VEGAS UX MEETUP</div>
+  <div class="footer-note">Brand Playbook · Full Social Kit · 2026</div>
+</div>
+
+</body>
+</html>
