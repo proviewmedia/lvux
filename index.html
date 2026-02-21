@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LVUX — Brand & Social Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #231f20;
+    --white: #f5f5f0;
+    --red: #FF2D20;
+    --gold: #FFD100;
+    --teal: #00C9B1;
+    --purple: #6865E8;
+    --surface: #141414;
+    --border: #1e1e1e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d0d0d; color: var(--white); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+
+  /* LOGO SVG sizing */
+  .logo-svg { display: inline-block; flex-shrink: 0; }
+  .logo-svg svg { display: block; }
+  .logo-svg.sz-xs  svg { width: 28px;  height: 28px; }
+  .logo-svg.sz-sm  svg { width: 40px;  height: 40px; }
+  .logo-svg.sz-md  svg { width: 60px;  height: 60px; }
+  .logo-svg.sz-lg  svg { width: 90px;  height: 90px; }
+  .logo-svg.sz-xl  svg { width: 120px; height: 120px; }
+  .logo-svg.sz-lockup svg { width: 52px; height: 52px; }
+  .logo-full svg { display: block; }
+  .logo-full.sz-md svg { width: 260px; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.97); backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .nav-bar {
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: 1rem; letter-spacing: 0.1em; color: var(--gold);
+    flex-shrink: 0;
+  }
+  /* Desktop links */
+  .nav-links {
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto; white-space: nowrap;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { color: #444; text-decoration: none; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 16px 14px; flex-shrink: 0; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  /* Hamburger button */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; cursor: pointer;
+    background: none; border: none; padding: 4px; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; height: 2px; width: 100%;
+    background: var(--gold); border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 6px rgba(255,209,0,0.4);
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  /* Mobile drawer */
+  .nav-drawer {
+    display: none;
+    flex-direction: column;
+    background: rgba(10,10,10,0.99);
+    border-top: 1px solid #1a1a1a;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .nav-drawer.open { max-height: 500px; }
+  .nav-drawer a {
+    color: #444; text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 16px 40px;
+    border-bottom: 1px solid #111;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-drawer a:hover { color: var(--gold); background: rgba(255,209,0,0.04); }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-drawer { display: flex; }
+    .nav-bar { padding: 0 24px; }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 95vh;
+    padding: 80px 40px 60px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-photo {
+    position: absolute; inset: 0;
+    background: url('https://images.pexels.com/photos/161772/pexels-photo-161772.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1') center center / cover no-repeat;
+  }
+  .hero-photo::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.25) 100%);
+  }
+  /* Vegas neon glow lines */
+  .hero-line {
+    position: absolute; pointer-events: none;
+    height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.15;
+  }
+  .hero-city {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 45%; pointer-events: none;
+    display: flex; align-items: center; justify-content: flex-end; padding-right: 40px;
+  }
+  .hero-diamond {
+    width: 420px; height: 420px;
+    border: 1px solid rgba(255,209,0,0.14);
+    box-shadow: 0 0 40px rgba(255,209,0,0.04), inset 0 0 40px rgba(255,209,0,0.02);
+    transform: rotate(45deg);
+    position: absolute; right: -80px;
+  }
+  .hero-diamond-inner {
+    width: 280px; height: 280px;
+    border: 1px solid rgba(104,101,232,0.25);
+    box-shadow: 0 0 30px rgba(104,101,232,0.08);
+    transform: rotate(45deg);
+    position: absolute; right: 30px; top: 70px;
+  }
+  .hero-dot-grid {
+    position: absolute; top: 40px; right: 60px;
+    display: grid; grid-template-columns: repeat(8, 1fr); gap: 18px;
+  }
+  .hero-dot { width: 2px; height: 2px; background: rgba(255,255,255,0.08); border-radius: 50%; }
+  .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal); margin-bottom: 24px; position: relative; }
+  .hero h1 {
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: clamp(5rem, 13vw, 12rem); line-height: 0.82;
+    text-transform: uppercase; letter-spacing: -0.01em;
+    position: relative;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero h1 .accent-line { display: block; color: var(--purple); }
+  .hero-bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-top: 40px; gap: 40px; flex-wrap: wrap; position: relative;
+  }
+  .hero-desc { font-size: 0.85rem; color: #555; line-height: 1.7; max-width: 400px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+  .hero-stat-num { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2.2rem; color: var(--white); line-height: 1; }
+  .hero-stat-label { font-size: 0.65rem; color: #444; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 4px; }
+
+  /* TICKER */
+  .ticker { background: var(--gold); color: var(--black); padding: 13px 0; overflow: hidden; white-space: nowrap; box-shadow: 0 0 30px rgba(255,209,0,0.3), 0 0 60px rgba(255,209,0,0.1); }
+  .ticker-inner { display: inline-flex; gap: 28px; animation: ticker 24s linear infinite; }
+  .ticker-inner span { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .ticker-dot { opacity: 0.35; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTION */
+  .section { padding: 70px 40px; border-bottom: 1px solid var(--border); }
+  .section-label { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #1e1e1e; }
+  .section-title { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 48px; }
+  .section-title em { color: var(--gold); font-style: normal; }
+
+  /* LOGO SHOWCASE */
+  .logo-showcase { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .logo-variant { padding: 50px 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .lv-dark  { background: #111; }
+  .lv-white { background: var(--white); }
+  .lv-gold  { background: var(--gold); }
+  .logo-variant-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #444; }
+  .lv-white .logo-variant-label { color: #999; }
+  .lv-gold  .logo-variant-label { color: #7a6000; }
+  .lockup { display: inline-flex; align-items: center; gap: 14px; }
+  .lockup-text { display: flex; flex-direction: column; gap: 2px; }
+  .lockup-text span { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1.4rem; line-height: 1.1; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; display: block; }
+  .lv-dark  .lockup-text span { color: var(--white); }
+  .lv-white .lockup-text span { color: var(--black); }
+  .lv-gold  .lockup-text span { color: var(--black); }
+
+  /* PALETTE */
+  .palette-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .pal-swatch { padding: 30px 20px; min-height: 160px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; }
+  .pal-name { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .pal-hex  { font-size: 0.68rem; opacity: 0.5; margin-top: 4px; letter-spacing: 0.08em; }
+
+  /* VOICE SECTION */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 1100px; margin: 0 auto 2px; }
+  .voice-card { background: var(--surface); padding: 44px 40px; border: 1px solid #1a1a1a; }
+  .voice-card-full { background: var(--surface); padding: 44px 40px; max-width: 1100px; margin: 0 auto 2px; border: 1px solid #1a1a1a; }
+  .voice-card.gold-border { border-left: 3px solid var(--gold); }
+  .voice-card.teal-border { border-left: 3px solid var(--teal); }
+  .voice-card.red-border  { border-left: 3px solid var(--red); }
+  .voice-card.purple-border { border-left: 3px solid var(--purple); }
+  .voice-card-title { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 20px; }
+  .voice-card-title.teal { color: var(--teal); }
+  .voice-card-title.red  { color: var(--red); }
+  .voice-card-title.purple { color: var(--purple); }
+  .voice-card-title.white { color: var(--white); }
+  .voice-body { font-size: 0.85rem; color: #888; line-height: 1.8; }
+  .voice-body strong { color: var(--white); font-weight: 600; }
+  .voice-body em { color: var(--gold); font-style: normal; }
+  .voice-examples { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; }
+  .voice-ex { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .voice-ex-bad  { background: #1a1010; padding: 14px 16px; border-left: 2px solid #3a1a1a; font-size: 0.78rem; color: #553333; line-height: 1.5; }
+  .voice-ex-good { background: #0f1a14; padding: 14px 16px; border-left: 2px solid var(--teal); font-size: 0.78rem; color: #888; line-height: 1.5; }
+  .voice-ex-bad strong  { display: block; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .voice-ex-good strong { display: block; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 6px; }
+  .dos, .donts { padding: 24px; }
+  .dos   { background: #0d1a11; }
+  .donts { background: #1a0d0d; }
+  .dos-label   { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+  .donts-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
+  .dos li, .donts li { font-size: 0.8rem; color: #666; line-height: 1.7; list-style: none; padding-left: 14px; position: relative; }
+  .dos li::before   { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+  .donts li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+  .phrase-grid { display: flex; flex-direction: column; gap: 3px; }
+  .phrase-row { display: flex; justify-content: space-between; align-items: center; background: #111; padding: 18px 24px; gap: 20px; border: 1px solid #1a1a1a; }
+  .phrase-context { font-size: 0.68rem; color: #444; letter-spacing: 0.15em; text-transform: uppercase; flex-shrink: 0; width: 160px; }
+  .phrase-text { font-size: 0.85rem; color: var(--white); line-height: 1.5; flex: 1; }
+  .phrase-text em { color: var(--gold); font-style: normal; }
+
+  /* SOCIAL GRID */
+  .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; max-width: 1100px; margin: 0 auto; }
+  .mini-brand { display: inline-flex; align-items: center; gap: 8px; }
+  .mini-brand-text { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.6rem; letter-spacing: 0.14em; color: #555; text-transform: uppercase; }
+
+  /* Instagram Square Post — fixed so content doesn't cut off */
+  .ig-sq {
+    aspect-ratio: 1; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 22px; background: var(--black);
+  }
+  .ig-sq .blob { position: absolute; border-radius: 50%; pointer-events: none; }
+  .ig-top { position: relative; z-index: 1; }
+  .ig-bottom { position: relative; z-index: 1; }
+  .ig-headline {
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: clamp(1.4rem, 2.8vw, 2rem); line-height: 0.92;
+    text-transform: uppercase; letter-spacing: 0.01em;
+    margin-top: 10px;
+  }
+  .ig-sub { font-size: 0.65rem; color: #666; margin-top: 6px; letter-spacing: 0.09em; text-transform: uppercase; }
+  .ig-cta { display: inline-block; padding: 5px 12px; margin-top: 10px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  .cta-gold    { background: var(--gold); color: var(--black); box-shadow: 0 0 16px rgba(255,209,0,0.4); }
+  .cta-teal    { background: var(--teal); color: var(--black); }
+  .cta-red     { background: var(--red);  color: var(--white); }
+  .cta-purple  { background: var(--purple); color: var(--white); }
+  .cta-outline { border: 1px solid #333;  color: #666; background: transparent; }
+
+  /* IG Story */
+  .ig-story { aspect-ratio: 0.5625; background: var(--black); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px; }
+  .story-ghost { position: absolute; font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 9rem; opacity: 0.04; pointer-events: none; top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; letter-spacing: -0.04em; }
+  .story-title { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2.4rem; line-height: 0.92; text-transform: uppercase; margin: 20px 0 8px; }
+  .story-eyebrow { font-size: 0.65rem; color: #555; letter-spacing: 0.15em; text-transform: uppercase; }
+  .story-pill { display: inline-block; padding: 8px 22px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 20px; }
+
+  /* LinkedIn Post */
+  .li-post { background: #f5f5f0; color: var(--black); padding: 32px; display: flex; flex-direction: column; gap: 16px; font-size: 0.85rem; line-height: 1.65; }
+  .li-post-header { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #ddd; padding-bottom: 16px; }
+  .li-avatar-wrap { width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--black); display: flex; align-items: center; justify-content: center; }
+  .li-profile-name { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1rem; color: var(--black); }
+  .li-profile-title { font-size: 0.72rem; color: #888; margin-top: 2px; }
+  .li-body { color: #222; }
+  .li-body strong { color: var(--black); }
+  .li-body .highlight { color: #0a66c2; font-weight: 600; }
+  .li-hashtags { font-size: 0.78rem; color: #0a66c2; line-height: 2; }
+  .li-engagement { display: flex; gap: 20px; font-size: 0.72rem; color: #999; border-top: 1px solid #ddd; padding-top: 12px; }
+
+  /* LinkedIn Banner */
+  .li-banner { background: var(--black); position: relative; overflow: hidden; display: flex; align-items: center; padding: 40px 50px; gap: 28px; min-height: 180px; }
+  .li-banner-glow { position: absolute; right: -60px; top: 50%; transform: translateY(-50%); width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, var(--gold) 0%, transparent 65%); opacity: 0.1; pointer-events: none; }
+  .li-banner-title { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2rem; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1; }
+  .li-banner-divider { width: 2px; height: 54px; background: #222; flex-shrink: 0; }
+  .li-banner-sub { font-size: 0.78rem; color: #666; letter-spacing: 0.09em; text-transform: uppercase; line-height: 1.7; }
+  .li-banner-sub strong { color: var(--gold); }
+
+  /* Strategy */
+  .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .strat-card { background: var(--surface); padding: 40px; border: 1px solid #1a1a1a; }
+  .strat-platform { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1.8rem; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+  .strat-platform.ig { color: #c13584; }
+  .strat-platform.li { color: #0a66c2; }
+  .strat-eyebrow { font-size: 0.65rem; color: #444; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 24px; }
+  .strat-row { margin-bottom: 20px; }
+  .strat-key { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--teal); margin-bottom: 6px; }
+  .strat-val { font-size: 0.82rem; color: #888; line-height: 1.6; }
+  .strat-val strong { color: var(--white); font-weight: 600; }
+
+  /* Captions */
+  .caption-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .caption-card { background: var(--surface); padding: 32px; border: 1px solid #1a1a1a; }
+  .caption-type { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .caption-body { font-size: 0.82rem; line-height: 1.75; color: #999; }
+  .caption-body .fill { color: var(--white); font-style: italic; }
+  .caption-body .hashtag { color: #0a66c2; }
+
+  /* Calendar */
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+  .cal-day-header { background: #111; padding: 12px 8px; text-align: center; font-family: 'Poppins', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #444; }
+  .cal-cell { background: var(--surface); padding: 14px 12px; min-height: 80px; border: 1px solid #1a1a1a; }
+  .cal-date { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: #333; margin-bottom: 6px; }
+  .cal-task { font-size: 0.65rem; line-height: 1.5; color: #666; }
+  .cal-pill { display: inline-block; padding: 2px 6px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; border-radius: 2px; }
+  .cp-ig   { background: rgba(193,53,132,0.2); color: #c13584; }
+  .cp-li   { background: rgba(10,102,194,0.2); color: #4a9fd4; }
+  .cp-both { background: rgba(255,209,0,0.15); color: var(--gold); }
+
+  /* Hashtag bank */
+  .hashtag-bank { display: flex; flex-wrap: wrap; gap: 8px; max-width: 1100px; margin: 0 auto; }
+  .ht { padding: 7px 14px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; border: 1px solid #222; color: #666; cursor: default; transition: all 0.2s; }
+  .ht:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+  .ht.primary   { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 10px rgba(255,209,0,0.15); }
+  .ht.secondary { border-color: var(--teal); color: var(--teal); box-shadow: 0 0 10px rgba(0,201,177,0.15); }
+
+  /* Footer */
+  .footer { padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,209,0,0.15); flex-wrap: wrap; gap: 12px; box-shadow: 0 -1px 40px rgba(255,209,0,0.04); }
+  .footer-brand { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1rem; letter-spacing: 0.1em; color: #2a2a2a; }
+  .footer-note { font-size: 0.7rem; color: #333; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  @media (max-width: 900px) {
+    .palette-grid { grid-template-columns: repeat(3, 1fr); }
+    .strategy-grid, .social-grid, .caption-grid, .logo-showcase, .voice-grid { grid-template-columns: 1fr; }
+    .cal-grid { grid-template-columns: repeat(4, 1fr); }
+    .voice-ex, .dos-donts { grid-template-columns: 1fr; }
+    .phrase-row { flex-direction: column; }
+    .phrase-context { width: auto; }
+    .hero h1 { font-size: clamp(3rem, 12vw, 6rem); }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-drawer { display: flex; }
+    .nav-bar { padding: 0 24px; }
+    .section { padding: 48px 24px; }
+    .hero { padding: 60px 24px 48px; min-height: 80vh; }
+    .hero-city { display: none; }
+    .footer { padding: 24px; }
+    .palette-grid { grid-template-columns: repeat(2, 1fr); }
+    .social-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .li-banner { flex-direction: column; align-items: flex-start; padding: 32px 24px; gap: 16px; }
+    .li-banner-divider { display: none; }
+    .voice-card-full, .voice-card { padding: 28px 24px; }
+    .cal-grid { grid-template-columns: repeat(3, 1fr); }
+    .phrase-row { padding: 14px 16px; }
+  }
+
+  /* IG post image bg */
+  .ig-post-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .ig-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .ig-overlay { position: absolute; inset: 0; z-index: 1; }
+  .ig-eyebrow { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 5px; }
+  .ig-top { position: relative; z-index: 3; }
+  .ig-bottom { position: relative; z-index: 3; }
+  /* Download button */
+  .dl-btn {
+    width: 100%; background: #111; border: 1px solid #222;
+    color: #555; font-family: 'Poppins', sans-serif; font-size: 0.65rem;
+    font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 11px; cursor: pointer; transition: background 0.2s, color 0.2s;
+  }
+  .dl-btn:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+<!-- Reusable SVG symbol -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="lvux-icon" viewBox="0 0 100.8 100.8">
+    <path fill="#231f20" d="M0,0h100.8v100.8H20.01c-11.05,0-20.01-8.97-20.01-20.01V0h0Z"/>
+    <path fill="#fff" d="M51.65,8.03h11.86l8.27,26.43,8.16-26.43h11.52l-13.64,36.73h-12.3l-13.87-36.73Z"/>
+    <path fill="#fff" d="M33.15,55.48h11.33v21.89c0,2.17-.34,4.22-1.01,6.14-.68,1.93-1.74,3.62-3.18,5.06s-2.96,2.46-4.55,3.04c-2.2.82-4.85,1.23-7.94,1.23-1.79,0-3.74-.13-5.85-.38s-3.88-.75-5.3-1.49-2.72-1.8-3.9-3.17-1.98-2.78-2.42-4.23c-.7-2.34-1.05-4.41-1.05-6.21v-21.89h11.33v22.4c0,2,.56,3.57,1.67,4.69,1.11,1.13,2.65,1.69,4.62,1.69s3.49-.56,4.6-1.67c1.11-1.11,1.67-2.68,1.67-4.72v-22.4Z"/>
+    <path fill="#fff" d="M52.74,55.79h12.5l6.5,11.3,6.33-11.3h12.38l-11.43,17.79,12.51,18.94h-12.75l-7.25-11.8-7.25,11.8h-12.68l12.67-19.14-11.52-17.59Z"/>
+    <path fill="#fff" d="M20.67,35.65V7.96h-11.35v36.73c11.68.04,23.37.09,35.05.13.02-3.09.04-6.18.05-9.27-7.92.03-15.84.06-23.75.09Z"/>
+  </symbol>
+</svg>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-bar">
+    <div class="nav-brand">LVUX</div>
+    <div class="nav-links">
+      <a href="#voice">Who We Are</a>
+      <a href="#logo">Logo</a>
+      <a href="#colors">Colors</a>
+      <a href="#social">Templates</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#captions">Captions</a>
+      <a href="#hashtags">Hashtags</a>
+    </div>
+    <button class="nav-hamburger" id="menuBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-drawer" id="menuDrawer">
+    <a href="#voice" onclick="closeMenu()">Who We Are</a>
+    <a href="#logo" onclick="closeMenu()">Logo</a>
+    <a href="#colors" onclick="closeMenu()">Colors</a>
+    <a href="#social" onclick="closeMenu()">Templates</a>
+    <a href="#strategy" onclick="closeMenu()">Strategy</a>
+    <a href="#captions" onclick="closeMenu()">Captions</a>
+    <a href="#hashtags" onclick="closeMenu()">Hashtags</a>
+  </div>
+</nav>
+<script>
+  const btn = document.getElementById('menuBtn');
+  const drawer = document.getElementById('menuDrawer');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    drawer.classList.toggle('open');
+  });
+  function closeMenu() {
+    btn.classList.remove('open');
+    drawer.classList.remove('open');
+  }
+</script>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-eyebrow" style="position:relative;z-index:2;">Las Vegas UX Meetup · Brand & Social Playbook · 2026</div>
+  <h1 style="position:relative;z-index:2;">Where the<br>lights<br>never<br><em>dim.</em></h1>
+  <div class="hero-bottom" style="position:relative;z-index:2;">
+    <div class="hero-desc">Brand identity · Social voice · Internal team reference · 2026</div>
+    <div style="font-size:0.65rem;color:#444;letter-spacing:0.15em;text-transform:uppercase;">Photo: Las Vegas Strip · Pexels</div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>#LVUX</span><span class="ticker-dot">◆</span>
+    <span>#LasVegasUX</span><span class="ticker-dot">◆</span>
+    <span>#UXMeetup</span><span class="ticker-dot">◆</span>
+    <span>#DesignLV</span><span class="ticker-dot">◆</span>
+    <span>#UXDesign</span><span class="ticker-dot">◆</span>
+    <span>#UXCommunity</span><span class="ticker-dot">◆</span>
+    <span>#ProductDesign</span><span class="ticker-dot">◆</span>
+    <span>#DesignThinking</span><span class="ticker-dot">◆</span>
+    <span>#LVUX</span><span class="ticker-dot">◆</span>
+    <span>#LasVegasUX</span><span class="ticker-dot">◆</span>
+    <span>#UXMeetup</span><span class="ticker-dot">◆</span>
+    <span>#DesignLV</span><span class="ticker-dot">◆</span>
+    <span>#UXDesign</span><span class="ticker-dot">◆</span>
+    <span>#UXCommunity</span><span class="ticker-dot">◆</span>
+    <span>#ProductDesign</span><span class="ticker-dot">◆</span>
+    <span>#DesignThinking</span><span class="ticker-dot">◆</span>
+  </div>
+</div>
+
+<!-- VEGAS PHOTO STRIP -->
+<div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:3px;max-height:360px;overflow:hidden;">
+  <div style="background:url('https://images.pexels.com/photos/12510549/pexels-photo-12510549.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center/cover no-repeat;min-height:360px;position:relative;">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.5),transparent);"></div>
+    <div style="position:absolute;bottom:28px;left:28px;">
+      <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">The Strip</div>
+      <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:2rem;line-height:0.9;text-transform:uppercase;color:var(--white);">Where<br>Experience<br>Lives</div>
+    </div>
+  </div>
+  <div style="background:url('https://images.pexels.com/photos/9989641/pexels-photo-9989641.jpeg?auto=compress&cs=tinysrgb&w=800&h=750&dpr=1') center/cover no-repeat;min-height:360px;position:relative;">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+    <div style="position:absolute;bottom:20px;left:20px;">
+      <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);">Neon · Culture</div>
+    </div>
+  </div>
+  <div style="background:url('https://images.pexels.com/photos/32760142/pexels-photo-32760142.jpeg?auto=compress&cs=tinysrgb&w=800&h=750&dpr=1') center/cover no-repeat;min-height:360px;position:relative;">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.3);"></div>
+    <div style="position:absolute;bottom:20px;left:20px;">
+      <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Iconic · Vegas</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WHO WE ARE / VOICE ═══ -->
+<div class="section" id="voice">
+  <div class="section-label">01 — Who We Are & Our Voice</div>
+  <div class="section-title">Who We <em>Are</em><br>& How We Sound</div>
+
+  <!-- Mission statement -->
+  <div class="voice-card-full" style="margin-bottom:2px;">
+    <div class="voice-card-title">When Someone Asks "What's LVUX?"</div>
+    <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(1.3rem,2.5vw,2rem);line-height:1.3;color:var(--white);margin-bottom:20px;">
+      Las Vegas's UX community. Free monthly meetups for designers, researchers, and product thinkers who are serious about the craft.
+    </div>
+    <div class="voice-body">That's it. No elevator pitch. No oversell. Vegas runs on instinct and confidence — your answer should too. If they want more, they'll ask. And when they do, you've got this whole playbook.</div>
+  </div>
+
+  <!-- What we are / what we're not -->
+  <div class="voice-grid" style="margin-bottom:2px;">
+    <div class="voice-card gold-border">
+      <div class="voice-card-title">What LVUX Is</div>
+      <div class="voice-body">
+        <strong>A practitioner's community.</strong> Designers, researchers, PMs, and strategists who treat UX as a discipline — not a job title. The kind of people who have opinions about cognitive load at dinner.<br><br>
+        <strong>Monthly. In person. Real.</strong> One night a month, no Zoom link, no virtual background. Talks, critiques, and conversations that actually go somewhere.<br><br>
+        <strong>Vegas, through and through.</strong> This city has been designing experiences at scale for a century. Every casino floor, resort app, loyalty platform, and kiosk is a live UX case study. We're the community built to match that ambition.<br><br>
+        <strong>Free. Full stop.</strong> No membership tier, no premium access, no catch. Show up and contribute.
+      </div>
+    </div>
+    <div class="voice-card teal-border">
+      <div class="voice-card-title teal">What LVUX Is Not</div>
+      <div class="voice-body">
+        <strong>Not a networking mixer.</strong> Connections happen here, but they're a byproduct of doing good work together — not the pitch.<br><br>
+        <strong>Not a beginner's club.</strong> Newcomers are welcome, but the conversation doesn't dumb down for anyone. Come ready to engage.<br><br>
+        <strong>Not a job board.</strong> Post openings on LinkedIn. Bring your work here.<br><br>
+        <strong>Not exclusive to one discipline.</strong> If you touch the user experience — whether you're a researcher, engineer, PM, or strategist — you belong in the room.
+      </div>
+    </div>
+  </div>
+
+  <!-- Tone & personality -->
+  <div class="voice-card-full" style="margin-bottom:2px;">
+    <div class="voice-card-title">Our Tone & Personality</div>
+    <div class="voice-grid" style="margin: 0; gap: 24px;">
+      <div>
+        <div class="voice-body" style="margin-bottom:16px;"><strong>Opinionated.</strong> We have a point of view on design, on Vegas, on what a community should actually do. We're not afraid to say so. Think AIGA Journal — not a press release.</div>
+        <div class="voice-body" style="margin-bottom:16px;"><strong>Specific.</strong> "Good vibes" is not a value proposition. Name the speaker. Name the topic. Name the street. Vegas Weekly doesn't describe the Strip as "exciting" — it tells you exactly which table has the best odds.</div>
+        <div class="voice-body" style="margin-bottom:16px;"><strong>Locally fluent.</strong> We know this city. We know Downtown is different from the Strip, which is different from Henderson. That specificity is what separates us from any other design meetup.</div>
+        <div class="voice-body"><strong>Warm without being soft.</strong> We welcome everyone. We lower the bar for nobody. Those two things coexist just fine.</div>
+      </div>
+      <div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#111;border:1px solid #1a1a1a;">
+            <span style="font-size:0.7rem;color:#444;letter-spacing:0.1em;text-transform:uppercase;">We sound like</span>
+            <span style="font-size:0.85rem;color:var(--white);font-weight:600;">A veteran Vegas designer who's shipped real work and has the receipts</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#111;border:1px solid #1a1a1a;">
+            <span style="font-size:0.7rem;color:#444;letter-spacing:0.1em;text-transform:uppercase;">We don't sound like</span>
+            <span style="font-size:0.85rem;color:#555;">A brand trying to seem relatable, or a meetup that's really just a recruiting event</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#111;border:1px solid #1a1a1a;">
+            <span style="font-size:0.7rem;color:#444;letter-spacing:0.1em;text-transform:uppercase;">Energy</span>
+            <span style="font-size:0.85rem;color:var(--gold);font-weight:600;">Direct. Local. Earned.</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#111;border:1px solid #1a1a1a;">
+            <span style="font-size:0.7rem;color:#444;letter-spacing:0.1em;text-transform:uppercase;">Writing style</span>
+            <span style="font-size:0.85rem;color:var(--white);">Specific, not vague. Confident, not loud. Vegas, not generic.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What to say phrases -->
+  <div class="voice-card-full" style="margin-bottom:2px;">
+    <div class="voice-card-title purple" style="margin-bottom:24px;">What to Say When Speaking About LVUX</div>
+    <div class="phrase-grid">
+      <div class="phrase-row">
+        <div class="phrase-context">Introducing LVUX</div>
+        <div class="phrase-text">"Las Vegas has a real UX community. LVUX — we meet once a month, it's free, and the people in the room are actually doing the work."</div>
+      </div>
+      <div class="phrase-row">
+        <div class="phrase-context">Inviting someone</div>
+        <div class="phrase-text">"It's not a networking thing. It's designers getting together to talk shop — <em>real critiques, real problems, real Vegas context</em>. Free. Come once and you'll see."</div>
+      </div>
+      <div class="phrase-row">
+        <div class="phrase-context">Talking about Vegas</div>
+        <div class="phrase-text">"Think about it — this entire city is a live UX case study. Every casino floor, every loyalty app, every resort check-in flow. The designers solving those problems are here. LVUX is just where they find each other."</div>
+      </div>
+      <div class="phrase-row">
+        <div class="phrase-context">Who it's for</div>
+        <div class="phrase-text">"Designers, researchers, PMs, engineers who care about the experience layer. If you have something to contribute to the conversation, you're in the right place."</div>
+      </div>
+      <div class="phrase-row">
+        <div class="phrase-context">After an event</div>
+        <div class="phrase-text">"[X] designers showed up, [Speaker] gave a talk worth taking notes on, and we were still in the parking lot talking at 10pm. That's the one."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Do / Don't -->
+  <div class="voice-card-full">
+    <div class="voice-card-title red" style="margin-bottom:24px;">Writing Do's & Don'ts</div>
+    <div class="voice-examples">
+      <div class="voice-ex">
+        <div class="voice-ex-bad"><strong>✗ Don't write this</strong>"Hey fam!! We're SO excited!! Come hang and network and maybe learn a little bit about UX!! 🎉🙌✨"</div>
+        <div class="voice-ex-good"><strong>✓ Write this instead</strong>"March 20. Downtown LV. [Speaker] on [Topic]. Doors at 6:30, talk starts at 7. Free. Link in bio."</div>
+      </div>
+      <div class="voice-ex">
+        <div class="voice-ex-bad"><strong>✗ Don't write this</strong>"Join our amazing community of like-minded UX professionals for synergistic networking and thought leadership!"</div>
+        <div class="voice-ex-good"><strong>✓ Write this instead</strong>"This is where Vegas designers come to think out loud. Once a month. Free. Bring your work — or just bring your questions."</div>
+      </div>
+      <div class="voice-ex">
+        <div class="voice-ex-bad"><strong>✗ Don't write this</strong>"We're just a scrappy little meetup, we don't have much to offer yet, but maybe someday… 🙏"</div>
+        <div class="voice-ex-good"><strong>✓ Write this instead</strong>"400+ designers. A city that runs on experience design. Monthly. Free. This community isn't an accident."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 01 LOGO ═══ -->
+<div class="section" id="logo">
+  <div class="section-label">02 — Logo System</div>
+  <div class="logo-showcase">
+    <div class="logo-variant lv-dark">
+      <div class="lockup">
+        <div class="logo-svg sz-lockup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <div class="lockup-text"><span>Las Vegas</span><span>UX Meetup</span></div>
+      </div>
+      <div class="logo-variant-label">Primary — Dark Background</div>
+    </div>
+    <div class="logo-variant lv-white">
+      <div class="lockup">
+        <div class="logo-svg sz-lockup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <div class="lockup-text"><span>Las Vegas</span><span>UX Meetup</span></div>
+      </div>
+      <div class="logo-variant-label">Primary — Light Background</div>
+    </div>
+    <div class="logo-variant lv-gold">
+      <div class="lockup">
+        <div class="logo-svg sz-lockup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <div class="lockup-text"><span>Las Vegas</span><span>UX Meetup</span></div>
+      </div>
+      <div class="logo-variant-label">Accent — Gold Background</div>
+    </div>
+  </div>
+
+  <!-- Full wordmark -->
+  <div style="max-width:1100px;margin:2px auto 0;background:#fff;padding:50px 60px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 376.85 100.8" style="width:100%;max-width:500px;display:block;">
+      <defs><style>.cls-1{fill:#231f20;}.cls-2{fill:#fff;}
+  /* IG post image bg */
+  .ig-post-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .ig-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .ig-overlay { position: absolute; inset: 0; z-index: 1; }
+  .ig-eyebrow { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 5px; }
+  .ig-top { position: relative; z-index: 3; }
+  .ig-bottom { position: relative; z-index: 3; }
+  /* Download button */
+  .dl-btn {
+    width: 100%; background: #111; border: 1px solid #222;
+    color: #555; font-family: 'Poppins', sans-serif; font-size: 0.65rem;
+    font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 11px; cursor: pointer; transition: background 0.2s, color 0.2s;
+  }
+  .dl-btn:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+</style></defs>
+      <path class="cls-1" d="M122.69,34.52h10.76v6.34h-18.97V7.15h8.21v27.37Z"/><path class="cls-1" d="M158.38,34.91h-12.58l-2.02,5.96h-8.6l12.2-33.71h9.51l12.2,33.71h-8.69l-2.02-5.96ZM156.26,28.57l-4.18-12.34-4.13,12.34h8.31Z"/><path class="cls-1" d="M178.36,40c-1.95-.8-3.51-1.98-4.68-3.55s-1.79-3.46-1.85-5.67h8.74c.13,1.25.56,2.2,1.3,2.86.73.66,1.7.99,2.88.99s2.18-.28,2.88-.84c.7-.56,1.06-1.34,1.06-2.33,0-.83-.28-1.52-.84-2.07-.56-.54-1.25-.99-2.07-1.34-.82-.35-1.98-.75-3.48-1.2-2.18-.67-3.95-1.34-5.33-2.02-1.38-.67-2.56-1.67-3.55-2.98-.99-1.32-1.49-3.03-1.49-5.14,0-3.14,1.14-5.6,3.41-7.37,2.27-1.78,5.23-2.66,8.88-2.66s6.71.89,8.98,2.66c2.27,1.77,3.49,4.25,3.65,7.42h-8.89c-.06-1.09-.46-1.95-1.2-2.57-.74-.62-1.68-.94-2.84-.94-.99,0-1.79.26-2.4.79-.61.53-.91,1.29-.91,2.28,0,1.09.51,1.94,1.54,2.55,1.02.61,2.62,1.27,4.8,1.97,2.18.74,3.95,1.44,5.31,2.11,1.36.67,2.53,1.65,3.53,2.93.99,1.28,1.49,2.93,1.49,4.94s-.49,3.67-1.46,5.24c-.98,1.57-2.4,2.82-4.25,3.75-1.86.93-4.05,1.39-6.58,1.39s-4.67-.4-6.63-1.2Z"/><path class="cls-1" d="M244.15,7.15l-11.96,33.71h-10.28l-11.96-33.71h8.74l8.36,25.45,8.4-25.45h8.69Z"/><path class="cls-1" d="M255.78,13.73v6.82h11v6.34h-11v7.4h12.44v6.58h-20.65V7.15h20.65v6.58h-12.44Z"/><path class="cls-1" d="M295.93,17.81c-.61-1.12-1.48-1.98-2.61-2.57-1.14-.59-2.48-.89-4.01-.89-2.66,0-4.79.87-6.39,2.61-1.6,1.75-2.4,4.08-2.4,6.99,0,3.11.84,5.53,2.52,7.27,1.68,1.75,4,2.62,6.94,2.62,2.02,0,3.73-.51,5.12-1.54,1.39-1.02,2.41-2.5,3.05-4.42h-10.42v-6.05h17.87v7.63c-.61,2.05-1.64,3.95-3.1,5.72s-3.31,3.19-5.55,4.27c-2.24,1.09-4.77,1.64-7.59,1.64-3.33,0-6.3-.73-8.91-2.19s-4.64-3.48-6.1-6.08-2.18-5.55-2.18-8.88.73-6.3,2.18-8.91c1.46-2.61,3.48-4.64,6.08-6.1s5.55-2.18,8.88-2.18c4.03,0,7.44.97,10.21,2.93s4.6,4.66,5.5,8.12h-9.08Z"/><path class="cls-1" d="M331.13,34.91h-12.58l-2.02,5.96h-8.6l12.2-33.71h9.51l12.2,33.71h-8.69l-2.02-5.96ZM329.02,28.57l-4.18-12.34-4.13,12.34h8.31Z"/><path class="cls-1" d="M351.11,40c-1.95-.8-3.51-1.98-4.68-3.55s-1.79-3.46-1.85-5.67h8.74c.13,1.25.56,2.2,1.3,2.86.73.66,1.7.99,2.88.99s2.18-.28,2.88-.84c.7-.56,1.06-1.34,1.06-2.33,0-.83-.28-1.52-.84-2.07-.56-.54-1.25-.99-2.07-1.34-.82-.35-1.98-.75-3.48-1.2-2.18-.67-3.95-1.34-5.33-2.02-1.38-.67-2.56-1.67-3.55-2.98-.99-1.32-1.49-3.03-1.49-5.14,0-3.14,1.14-5.6,3.41-7.37,2.27-1.78,5.23-2.66,8.88-2.66s6.71.89,8.98,2.66c2.27,1.77,3.49,4.25,3.65,7.42h-8.89c-.06-1.09-.46-1.95-1.2-2.57-.74-.62-1.68-.94-2.84-.94-.99,0-1.79.26-2.4.79-.61.53-.91,1.29-.91,2.28,0,1.09.51,1.94,1.54,2.55,1.02.61,2.62,1.27,4.8,1.97,2.18.74,3.95,1.44,5.31,2.11,1.36.67,2.53,1.65,3.53,2.93.99,1.28,1.49,2.93,1.49,4.94s-.49,3.67-1.46,5.24c-.98,1.57-2.4,2.82-4.25,3.75-1.86.93-4.05,1.39-6.58,1.39s-4.67-.4-6.63-1.2Z"/>
+      <path class="cls-1" d="M122.55,56.08v20.17c0,2.02.5,3.57,1.49,4.66.99,1.09,2.45,1.63,4.37,1.63s3.4-.54,4.42-1.63c1.03-1.09,1.54-2.64,1.54-4.66v-20.17h8.21v20.12c0,3.01-.64,5.56-1.92,7.64-1.28,2.08-3,3.65-5.16,4.71-2.16,1.06-4.57,1.59-7.23,1.59s-5.04-.52-7.13-1.56-3.75-2.61-4.97-4.71c-1.22-2.1-1.82-4.65-1.82-7.66v-20.12h8.21Z"/><path class="cls-1" d="M168.99,89.79l-6.87-10.33-6.05,10.33h-9.32l10.8-17.15-11.05-16.57h9.56l6.77,10.18,5.96-10.18h9.32l-10.71,17,11.14,16.71h-9.56Z"/><path class="cls-1" d="M231.04,56.08v33.71h-8.21v-20.22l-7.54,20.22h-6.63l-7.59-20.27v20.27h-8.21v-33.71h9.7l9.46,23.34,9.36-23.34h9.66Z"/><path class="cls-1" d="M245.16,62.66v6.82h11v6.34h-11v7.4h12.44v6.58h-20.65v-33.71h20.65v6.58h-12.44Z"/><path class="cls-1" d="M271.14,62.66v6.82h11v6.34h-11v7.4h12.44v6.58h-20.65v-33.71h20.65v6.58h-12.44Z"/><path class="cls-1" d="M313.17,56.08v6.58h-8.93v27.14h-8.21v-27.14h-8.93v-6.58h26.08Z"/><path class="cls-1" d="M325.37,56.08v20.17c0,2.02.5,3.57,1.49,4.66.99,1.09,2.45,1.63,4.37,1.63s3.4-.54,4.42-1.63c1.03-1.09,1.54-2.64,1.54-4.66v-20.17h8.21v20.12c0,3.01-.64,5.56-1.92,7.64-1.28,2.08-3,3.65-5.16,4.71-2.16,1.06-4.57,1.59-7.23,1.59s-5.04-.52-7.13-1.56-3.75-2.61-4.97-4.71c-1.22-2.1-1.82-4.65-1.82-7.66v-20.12h8.21Z"/><path class="cls-1" d="M375.51,72.29c-.9,1.62-2.28,2.92-4.13,3.91-1.86.99-4.16,1.49-6.92,1.49h-5.09v12.1h-8.21v-33.71h13.31c2.69,0,4.96.46,6.82,1.39,1.85.93,3.25,2.21,4.18,3.84.93,1.63,1.39,3.51,1.39,5.62,0,1.95-.45,3.74-1.34,5.35ZM367.34,70.05c.77-.73,1.15-1.77,1.15-3.12s-.38-2.38-1.15-3.12c-.77-.73-1.94-1.1-3.51-1.1h-4.46v8.45h4.46c1.57,0,2.74-.37,3.51-1.11Z"/>
+      <path class="cls-1" d="M0,0h100.8v100.8H20.01c-11.05,0-20.01-8.97-20.01-20.01V0h0Z"/><path class="cls-2" d="M51.65,8.03h11.86l8.27,26.43,8.16-26.43h11.52l-13.64,36.73h-12.3l-13.87-36.73Z"/><path class="cls-2" d="M33.15,55.48h11.33v21.89c0,2.17-.34,4.22-1.01,6.14-.68,1.93-1.74,3.62-3.18,5.06s-2.96,2.46-4.55,3.04c-2.2.82-4.85,1.23-7.94,1.23-1.79,0-3.74-.13-5.85-.38s-3.88-.75-5.3-1.49-2.72-1.8-3.9-3.17-1.98-2.78-2.42-4.23c-.7-2.34-1.05-4.41-1.05-6.21v-21.89h11.33v22.4c0,2,.56,3.57,1.67,4.69,1.11,1.13,2.65,1.69,4.62,1.69s3.49-.56,4.6-1.67c1.11-1.11,1.67-2.68,1.67-4.72v-22.4Z"/><path class="cls-2" d="M52.74,55.79h12.5l6.5,11.3,6.33-11.3h12.38l-11.43,17.79,12.51,18.94h-12.75l-7.25-11.8-7.25,11.8h-12.68l12.67-19.14-11.52-17.59Z"/><path class="cls-2" d="M20.67,35.65V7.96h-11.35v36.73c11.68.04,23.37.09,35.05.13.02-3.09.04-6.18.05-9.27-7.92.03-15.84.06-23.75.09Z"/>
+    </svg>
+    <div style="font-size:0.65rem;color:#aaa;letter-spacing:0.15em;text-transform:uppercase;margin-top:16px;">Primary Full Lockup — Use on White/Light Backgrounds</div>
+  </div>
+
+  <!-- Scale strip -->
+  <div style="max-width:1100px;margin:2px auto 0;background:#141414;padding:40px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;border:1px solid #1a1a1a;">
+    <div style="font-size:0.65rem;color:#333;letter-spacing:0.15em;text-transform:uppercase;writing-mode:vertical-lr;">Scale</div>
+    <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div class="logo-svg sz-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div class="logo-svg sz-md"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div class="logo-svg sz-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div class="logo-svg sz-xl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+    <div style="font-size:0.7rem;color:#444;line-height:2.2;">28px · Favicon/Profile<br>40px · App Icon<br>60px · Card Header<br>90px · Hero Banner<br>120px · Print / Large Format</div>
+  </div>
+
+  <!-- Icon-only on color backgrounds -->
+  <div style="max-width:1100px;margin:2px auto 0;">
+    <div style="font-size:0.65rem;color:#444;letter-spacing:0.2em;text-transform:uppercase;padding:16px 0 12px;border-bottom:1px solid #1a1a1a;margin-bottom:2px;">Icon Mark — On All Backgrounds</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;">
+      <div style="background:#0d0d0d;padding:40px;display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <div class="logo-svg sz-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <div style="font-size:0.6rem;color:#333;letter-spacing:0.15em;text-transform:uppercase;">Black</div>
+      </div>
+      <div style="background:#231f20;padding:40px;display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <div class="logo-svg sz-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <div style="font-size:0.6rem;color:#555;letter-spacing:0.15em;text-transform:uppercase;">Obsidian</div>
+      </div>
+      <div style="background:#f5f5f0;padding:40px;display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <div class="logo-svg sz-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <div style="font-size:0.6rem;color:#999;letter-spacing:0.15em;text-transform:uppercase;">Chalk</div>
+      </div>
+      <div style="background:var(--gold);padding:40px;display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <div class="logo-svg sz-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <div style="font-size:0.6rem;color:#7a6000;letter-spacing:0.15em;text-transform:uppercase;">Vegas Gold</div>
+      </div>
+      <div style="background:var(--purple);padding:40px;display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <div class="logo-svg sz-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+        <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);letter-spacing:0.15em;text-transform:uppercase;">Electric Purple</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CITY PHOTO BREAK -->
+<div style="position:relative;height:280px;overflow:hidden;border-bottom:1px solid #1e1e1e;">
+  <div style="position:absolute;inset:0;background:url('https://images.pexels.com/photos/444964/pexels-photo-444964.jpeg?auto=compress&cs=tinysrgb&w=1920&h=600&dpr=1') center 60%/cover no-repeat;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.6) 100%);"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;padding:0 40px;justify-content:space-between;">
+    <div>
+      <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;">Las Vegas, Nevada</div>
+      <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3.5rem);line-height:0.9;text-transform:uppercase;color:var(--white);">This city has<br>been designing<br>experiences at scale<br><span style="color:var(--gold)">for a century.</span></div>
+    </div>
+    <div style="font-size:0.65rem;color:#333;letter-spacing:0.15em;text-transform:uppercase;">Photo: Pexels</div>
+  </div>
+</div>
+
+<!-- ═══ COLORS ═══ -->
+<div class="section" id="colors">
+  <div class="section-label">03 — Color Palette</div>
+  <div class="palette-grid">
+    <div class="pal-swatch" style="background:#231f20;"><div class="pal-name">Obsidian</div><div class="pal-hex">#231F20 · Primary</div></div>
+    <div class="pal-swatch" style="background:#f5f5f0;"><div class="pal-name" style="color:#111">Chalk</div><div class="pal-hex" style="color:#111">#F5F5F0 · Background</div></div>
+    <div class="pal-swatch" style="background:var(--gold);"><div class="pal-name" style="color:#111">Vegas Gold</div><div class="pal-hex" style="color:#111">#FFD100 · Accent 01</div></div>
+    <div class="pal-swatch" style="background:var(--teal);"><div class="pal-name" style="color:#111">Electric Teal</div><div class="pal-hex" style="color:#111">#00C9B1 · Accent 02</div></div>
+    <div class="pal-swatch" style="background:var(--purple);position:relative;"><div style="position:absolute;top:12px;right:12px;background:white;color:#231f20;font-size:0.55rem;font-weight:900;letter-spacing:0.1em;padding:3px 7px;text-transform:uppercase;">NEW</div><div class="pal-name">Electric Purple</div><div class="pal-hex">#6865E8 · Accent 03</div></div>
+    <div class="pal-swatch" style="background:var(--red);"><div class="pal-name">Neon Red</div><div class="pal-hex">#FF2D20 · CTA</div></div>
+    <div class="pal-swatch" style="background:#141414;"><div class="pal-name">Charcoal</div><div class="pal-hex">#141414 · Surface</div></div>
+  </div>
+</div>
+
+<!-- ═══ INSTAGRAM TEMPLATES ═══ -->
+<div class="section" id="social">
+  <div class="section-label">04 — Instagram Templates</div>
+  <p style="font-size:0.82rem;color:#555;margin-bottom:32px;max-width:700px;">Six ready-to-post 1080×1080 templates. Each uses a different Vegas photo. Hit <strong style="color:var(--white)">↓ Download</strong> to save as PNG.</p>
+
+  <div class="social-grid" id="ig-grid">
+
+    <!-- Post 1: Event — Bellagio Fountains -->
+    <div class="ig-post-wrap">
+      <div class="ig-sq ig-canvas-post" id="post1" data-photo="https://images.pexels.com/photos/28207239/pexels-photo-28207239.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1080&dpr=1" data-filename="lvux-march-meetup">
+        <img class="ig-bg-img" src="https://images.pexels.com/photos/28207239/pexels-photo-28207239.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1080&dpr=1" crossorigin="anonymous" alt="">
+        <div class="ig-overlay" style="background:linear-gradient(160deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.88) 100%);"></div>
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--gold);z-index:3;"></div>
+        <div class="ig-top">
+          <div class="mini-brand">
+            <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+            <span class="mini-brand-text" style="color:#ccc;">@lvux.design</span>
+          </div>
+        </div>
+        <div class="ig-bottom">
+          <div class="ig-eyebrow" style="color:var(--gold);">Monthly Meetup</div>
+          <div class="ig-headline">March 20<br><span style="color:var(--gold);">Downtown<br>Las Vegas</span></div>
+          <div class="ig-sub" style="color:#bbb;">Thu · 6:30 PM · Free · RSVP in bio</div>
+          <div class="ig-cta cta-gold" style="margin-top:10px;">Reserve Your Spot →</div>
+        </div>
+      </div>
+      <button class="dl-btn" onclick="downloadPost('post1')">↓ Download PNG</button>
+    </div>
+
+    <!-- Post 2: Portfolio Night — Strip Light Trails -->
+    <div class="ig-post-wrap">
+      <div class="ig-sq ig-canvas-post" id="post2" data-filename="lvux-portfolio-night">
+        <img class="ig-bg-img" src="https://images.pexels.com/photos/12510549/pexels-photo-12510549.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1080&dpr=1" crossorigin="anonymous" alt="">
+        <div class="ig-overlay" style="background:linear-gradient(to top,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.1) 100%);"></div>
+        <div style="position:absolute;top:0;bottom:0;left:0;width:4px;background:var(--teal);z-index:3;"></div>
+        <div class="ig-top" style="padding-left:14px;">
+          <div class="mini-brand">
+            <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+            <span class="mini-brand-text" style="color:#ccc;">@lvux.design</span>
+          </div>
+        </div>
+        <div class="ig-bottom" style="padding-left:14px;">
+          <div class="ig-eyebrow" style="color:var(--teal);">Portfolio Night</div>
+          <div class="ig-headline">Show<br>Your<br><span style="color:var(--teal);">Work.</span></div>
+          <div class="ig-sub" style="color:#bbb;">Present · Critique · Connect</div>
+          <div class="ig-cta cta-teal">Submit Your Case Study →</div>
+        </div>
+      </div>
+      <button class="dl-btn" onclick="downloadPost('post2')">↓ Download PNG</button>
+    </div>
+
+    <!-- Post 3: Speaker — Flamingo Neon -->
+    <div class="ig-post-wrap">
+      <div class="ig-sq ig-canvas-post" id="post3" data-filename="lvux-speaker-spotlight">
+        <img class="ig-bg-img" src="https://images.pexels.com/photos/9989641/pexels-photo-9989641.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1080&dpr=1" crossorigin="anonymous" alt="">
+        <div class="ig-overlay" style="background:linear-gradient(to top,rgba(104,101,232,0.9) 0%,rgba(0,0,0,0.4) 60%,rgba(0,0,0,0.15) 100%);"></div>
+        <div class="ig-top">
+          <div class="mini-brand">
+            <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+            <span class="mini-brand-text" style="color:#ccc;">Speaker Spotlight</span>
+          </div>
+        </div>
+        <div class="ig-bottom">
+          <div class="ig-eyebrow" style="color:#a8a5ff;">Community Talk · #LVUX</div>
+          <div class="ig-headline">Featured<br><span style="color:var(--white);">Speaker</span></div>
+          <div class="ig-sub" style="color:#bbb;">[Name] · [Topic]</div>
+          <div class="ig-cta cta-purple">Watch the Recap →</div>
+        </div>
+      </div>
+      <button class="dl-btn" onclick="downloadPost('post3')">↓ Download PNG</button>
+    </div>
+
+    <!-- Post 4: UX Quote — Bellagio Aerial Twilight -->
+    <div class="ig-post-wrap">
+      <div class="ig-sq ig-canvas-post" id="post4" data-filename="lvux-ux-quote">
+        <img class="ig-bg-img" src="https://images.pexels.com/photos/33464935/pexels-photo-33464935.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1080&dpr=1" crossorigin="anonymous" alt="">
+        <div class="ig-overlay" style="background:rgba(0,0,0,0.75);"></div>
+        <div style="position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 110px 110px 0;border-color:transparent var(--gold) transparent transparent;z-index:3;"></div>
+        <div class="ig-top">
+          <div class="mini-brand">
+            <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+            <span class="mini-brand-text" style="color:#ccc;">UX Principle</span>
+          </div>
+        </div>
+        <div class="ig-bottom">
+          <div class="ig-eyebrow" style="color:var(--gold);">#LVUX · Design Truth</div>
+          <div style="font-family:'Poppins',sans-serif;font-size:clamp(1.3rem,2.6vw,1.85rem);font-weight:900;line-height:0.95;text-transform:uppercase;margin-top:6px;">"Test early.<br>Fail cheap.<br><span style="color:var(--gold);">Win often."</span></div>
+          <div class="ig-sub" style="color:#666;margin-top:10px;">Vegas ran its whole economy on knowing when to hold.</div>
+        </div>
+      </div>
+      <button class="dl-btn" onclick="downloadPost('post4')">↓ Download PNG</button>
+    </div>
+
+    <!-- Post 5: Stats — Strip Panorama -->
+    <div class="ig-post-wrap">
+      <div class="ig-sq ig-canvas-post" id="post5" data-filename="lvux-community-stats">
+        <img class="ig-bg-img" src="https://images.pexels.com/photos/444964/pexels-photo-444964.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1080&dpr=1" crossorigin="anonymous" alt="">
+        <div class="ig-overlay" style="background:linear-gradient(to bottom,rgba(255,209,0,0.9) 0%,rgba(0,0,0,0.88) 50%,rgba(0,0,0,0.96) 100%);"></div>
+        <div class="ig-top">
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="mini-brand">
+              <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+              <span class="mini-brand-text" style="color:#111;">@lvux.design</span>
+            </div>
+            <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#222;">Las Vegas, NV</span>
+          </div>
+        </div>
+        <div class="ig-bottom">
+          <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(3rem,5.5vw,4.8rem);line-height:0.82;text-transform:uppercase;color:#fff;">400+<br><span style="color:var(--gold);font-size:0.48em;letter-spacing:0.05em;">Designers</span></div>
+          <div class="ig-sub" style="color:#555;margin-top:12px;">Free monthly · Las Vegas · Since 2023</div>
+        </div>
+      </div>
+      <button class="dl-btn" onclick="downloadPost('post5')">↓ Download PNG</button>
+    </div>
+
+    <!-- Post 6: Recap — Welcome to Vegas Sign -->
+    <div class="ig-post-wrap">
+      <div class="ig-sq ig-canvas-post" id="post6" data-filename="lvux-event-recap">
+        <img class="ig-bg-img" src="https://images.pexels.com/photos/32760142/pexels-photo-32760142.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1080&dpr=1" crossorigin="anonymous" alt="">
+        <div class="ig-overlay" style="background:linear-gradient(to top,rgba(0,0,0,0.96) 0%,rgba(0,0,0,0.35) 60%,rgba(0,0,0,0.08) 100%);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--teal);z-index:3;"></div>
+        <div class="ig-top">
+          <div class="mini-brand">
+            <div class="logo-svg sz-xs"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+            <span class="mini-brand-text" style="color:#ccc;">Monthly Recap</span>
+          </div>
+        </div>
+        <div class="ig-bottom">
+          <div class="ig-eyebrow" style="color:var(--teal);">Still talking at 10pm. That's the one.</div>
+          <div class="ig-headline">Feb<br>Meetup<br><span style="color:var(--teal);">✓</span></div>
+          <div class="ig-sub" style="color:#bbb;">Next up: March 20 · Downtown LV</div>
+          <div class="ig-cta" style="border:1px solid var(--teal);color:var(--teal);display:inline-block;padding:5px 12px;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;margin-top:8px;">See Highlights →</div>
+        </div>
+      </div>
+      <button class="dl-btn" onclick="downloadPost('post6')">↓ Download PNG</button>
+    </div>
+
+  </div>
+
+  <!-- Story + LinkedIn Banner -->
+  <div style="max-width:1100px;margin:3px auto 0;display:grid;grid-template-columns:1fr 2fr;gap:3px;">
+    <div class="ig-story" style="position:relative;">
+      <img src="https://images.pexels.com/photos/34960589/pexels-photo-34960589.jpeg?auto=compress&cs=tinysrgb&w=600&h=1066&dpr=1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="">
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.65);"></div>
+      <div class="story-ghost" style="position:relative;z-index:1;">LVUX</div>
+      <div class="logo-svg sz-md" style="position:relative;z-index:1;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+      <div class="story-eyebrow" style="margin-top:20px;position:relative;z-index:1;">Las Vegas, NV</div>
+      <div class="story-title" style="position:relative;z-index:1;">You're<br>Invited</div>
+      <div class="story-eyebrow" style="position:relative;z-index:1;">Free Monthly Meetup</div>
+      <div class="story-pill cta-gold" style="position:relative;z-index:1;">RSVP Now</div>
+    </div>
+    <div class="li-banner">
+      <div class="li-banner-glow"></div>
+      <div class="logo-svg sz-xl" style="flex-shrink:0;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+      <div class="li-banner-divider"></div>
+      <div>
+        <div class="li-banner-title" style="white-space:nowrap;">Las Vegas<br>UX Meetup</div>
+        <div style="height:8px;"></div>
+        <div class="li-banner-sub"><strong>Free community</strong> for UX designers,<br>researchers &amp; product thinkers.<br><strong>Meet. Learn. Build.</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LINKEDIN TEMPLATES ═══ -->
+<div class="section">
+  <div class="section-label">05 — LinkedIn Post Templates</div>
+  <div class="strategy-grid">
+    <div class="li-post">
+      <div class="li-post-header">
+        <div class="li-avatar-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8" width="46" height="46"><use href="#lvux-icon"/></svg></div>
+        <div>
+          <div class="li-profile-name">LVUX — Las Vegas UX Meetup</div>
+          <div class="li-profile-title">Design Community · Las Vegas, NV · 400+ Members</div>
+        </div>
+      </div>
+      <div class="li-body">
+        <strong>LVUX is back. March 20. Downtown Las Vegas.</strong><br><br>
+        <span class="highlight">[Speaker]</span> is presenting on <span class="highlight">[topic]</span>. If you've been meaning to get in a room with other designers in this city, this is the one to start with.<br><br>
+        ▸ Talk + open Q&A<br>
+        ▸ Portfolio review session<br>
+        ▸ The conversation that keeps going after<br><br>
+        <strong>Thursday, March 20 · 6:30 PM</strong><br>
+        <strong>Downtown Las Vegas</strong><br>
+        <strong>Free. RSVP link in comments.</strong><br><br>
+        Know a designer in Vegas who should be in this room? Tag them.
+      </div>
+      <div class="li-hashtags">#LVUX #UXDesign #LasVegasUX #UXMeetup #DesignCommunity #ProductDesign</div>
+      <div class="li-engagement"><span>👍 Like</span><span>💬 Comment</span><span>↗ Repost</span><span>📤 Send</span></div>
+    </div>
+    <div class="li-post">
+      <div class="li-post-header">
+        <div class="li-avatar-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8" width="46" height="46"><use href="#lvux-icon"/></svg></div>
+        <div>
+          <div class="li-profile-name">LVUX — Las Vegas UX Meetup</div>
+          <div class="li-profile-title">Design Community · Las Vegas, NV · 400+ Members</div>
+        </div>
+      </div>
+      <div class="li-body">
+        <strong>Vegas has been doing experience design longer than Silicon Valley has had a name for it.</strong><br><br>
+        The casino floor figured out wayfinding, reward psychology, and sensory hierarchy before UX was a discipline. Every hotel app is a retention problem. Every digital kiosk on the Strip is a touchpoint in a journey that starts months before check-in.<br><br>
+        The designers solving those problems are in this city. Most of them don't know each other yet.<br><br>
+        <span class="highlight">LVUX</span> is a free monthly meetup for the UX practitioners building Las Vegas — designers, researchers, PMs, and strategists who take the work seriously.<br><br>
+        <strong>What's the hardest UX problem you're working on right now?</strong>
+      </div>
+      <div class="li-hashtags">#LVUX #LasVegasUX #UXDesign #DesignLeadership #ProductDesign #DesignThinking</div>
+      <div class="li-engagement"><span>👍 Like</span><span>💬 Comment</span><span>↗ Repost</span><span>📤 Send</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STRATEGY ═══ -->
+<div class="section" id="strategy">
+  <div class="section-label">06 — Platform Strategy</div>
+  <div class="strategy-grid">
+    <div class="strat-card">
+      <div class="strat-platform ig">Instagram</div>
+      <div class="strat-eyebrow">@lvux.design · Visual Community Hub</div>
+      <div class="strat-row"><div class="strat-key">Posting Frequency</div><div class="strat-val"><strong>4–5×/week</strong> — 3 feed posts + 2 stories. Reels when you have event video.</div></div>
+      <div class="strat-row"><div class="strat-key">Best Times to Post</div><div class="strat-val"><strong>Tue–Thu, 11AM–1PM</strong> or <strong>6–8PM PT</strong>. Avoid Mondays and Sunday mornings.</div></div>
+      <div class="strat-row"><div class="strat-key">Content Mix</div><div class="strat-val"><strong>40%</strong> Events & recaps · <strong>30%</strong> UX tips & carousels · <strong>20%</strong> Community spotlights · <strong>10%</strong> Relatable/memes</div></div>
+      <div class="strat-row"><div class="strat-key">Stories Strategy</div><div class="strat-val">Countdown stickers pre-event. Polls ("Which topic next?"). Q&A boxes. Behind-the-scenes setup.</div></div>
+      <div class="strat-row"><div class="strat-key">Bio Setup</div><div class="strat-val">🖥 Free UX community · Las Vegas NV<br>📅 Monthly meetups + workshops<br>🔗 linktr.ee/lvux</div></div>
+      <div class="strat-row"><div class="strat-key">Hashtags Per Post</div><div class="strat-val"><strong>10–15 in first comment</strong> (not caption). Mix: 3 branded + 4 niche + 4 broader + 2 local.</div></div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-platform li">LinkedIn</div>
+      <div class="strat-eyebrow">LVUX Las Vegas UX Meetup · Professional Network</div>
+      <div class="strat-row"><div class="strat-key">Posting Frequency</div><div class="strat-val"><strong>3–4×/week</strong> — quality over quantity. LinkedIn rewards dwell time, not volume.</div></div>
+      <div class="strat-row"><div class="strat-key">Best Times to Post</div><div class="strat-val"><strong>Tue–Thu, 7–9AM PT</strong> or <strong>12–1PM</strong>. Tuesday morning is the single highest-engagement slot.</div></div>
+      <div class="strat-row"><div class="strat-key">Content Mix</div><div class="strat-val"><strong>40%</strong> Thought leadership · <strong>30%</strong> Event announcements · <strong>20%</strong> Community stories · <strong>10%</strong> Industry commentary</div></div>
+      <div class="strat-row"><div class="strat-key">Post Format Tips</div><div class="strat-val">Open with a <strong>bold first line</strong>. Use line breaks every 1–2 sentences. End every post with a direct question.</div></div>
+      <div class="strat-row"><div class="strat-key">Page Setup</div><div class="strat-val">Upload LinkedIn banner (1584×396px). Complete all sections. Link to Meetup.com RSVP page.</div></div>
+      <div class="strat-row"><div class="strat-key">Hashtags Per Post</div><div class="strat-val"><strong>3–5 hashtags max</strong> in caption. Always include <strong>#LVUX</strong> and <strong>#UXDesign</strong>.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CAPTIONS ═══ -->
+<div class="section" id="captions">
+  <div class="section-label">07 — Caption Templates</div>
+  <div class="caption-grid">
+    <div class="caption-card">
+      <div class="caption-type">📅 Event Announcement — Instagram</div>
+      <div class="caption-body">
+        <span class="fill">March 20. Downtown Las Vegas.</span><br><br>
+        <span class="fill">[Speaker]</span> is talking about <span class="fill">[topic]</span> — the kind of thing that actually changes how you work, not just how you talk about work.<br><br>
+        Doors at 6:30. Talk at 7. Portfolio reviews open after.<br>Free. Always.<br><br>
+        RSVP in bio. Bring a designer you've been meaning to introduce yourself to.<br><br>
+        <span class="hashtag">#LVUX #LasVegasUX #UXMeetup #DesignLV #UXDesign #UXCommunity</span>
+      </div>
+    </div>
+    <div class="caption-card">
+      <div class="caption-type">💼 Event Announcement — LinkedIn</div>
+      <div class="caption-body">
+        <span class="fill">LVUX · March 20 · Downtown Las Vegas</span><br><br>
+        <span class="fill">[Speaker]</span> is presenting on <span class="fill">[topic]</span>. If you work in UX in this city, this is a conversation worth showing up for.<br><br>
+        ▸ Talk + Q&A with <span class="fill">[Speaker]</span><br>
+        ▸ Open portfolio review session<br>
+        ▸ The kind of hallway conversation that doesn't happen on Slack<br><br>
+        Free. 6:30PM. No registration wall — just RSVP so we can get a headcount.<br><br>
+        If you know someone doing good design work in Vegas, bring them.<br><br>
+        <span class="hashtag">#LVUX #UXDesign #LasVegasUX #DesignCommunity</span>
+      </div>
+    </div>
+    <div class="caption-card">
+      <div class="caption-type">📸 Post-Event Recap — Instagram</div>
+      <div class="caption-body">
+        <span class="fill">[X]</span> designers. One room. Two hours.<br><br>
+        <span class="fill">@speaker</span> walked us through <span class="fill">[topic]</span> — real work, real decisions, real tradeoffs. No polish for the sake of it.<br><br>
+        We were still in the parking lot at 10pm. That's the tell.<br><br>
+        Next one: <span class="fill">March 20</span>. Link in bio.<br><br>
+        <span class="hashtag">#LVUX #LasVegasUX #UXDesign #UXMeetup #DesignCommunity</span>
+      </div>
+    </div>
+    <div class="caption-card">
+      <div class="caption-type">🔥 Thought Leadership — LinkedIn</div>
+      <div class="caption-body">
+        Vegas doesn't get mentioned in design conversations. That's a mistake.<br><br>
+        This city has been designing human behavior at scale for decades. The casino floor is a masterclass in wayfinding, reward loops, and sensory hierarchy. Every resort app is a product problem. Every loyalty tier is a retention strategy.<br><br>
+        The designers building those systems live here. Work here. Most of them have never been in the same room together.<br><br>
+        That's the gap LVUX exists to close.<br><br>
+        What experience challenge are you working on right now?<br><br>
+        <span class="hashtag">#LVUX #UXDesign #LasVegasUX #DesignLeadership</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FREMONT PHOTO BREAK -->
+<div style="position:relative;height:240px;overflow:hidden;border-top:1px solid #1e1e1e;border-bottom:1px solid #1e1e1e;">
+  <div style="position:absolute;inset:0;background:url('https://images.pexels.com/photos/34960589/pexels-photo-34960589.jpeg?auto=compress&cs=tinysrgb&w=1920&h=600&dpr=1') center center/cover no-repeat;"></div>
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;">
+    <div>
+      <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Downtown Las Vegas · Fremont Street</div>
+      <div style="font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,4rem);line-height:0.9;text-transform:uppercase;color:var(--white);">Built by this city.<br><span style="color:var(--gold)">For this city.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HASHTAGS ═══ -->
+<div class="section" id="hashtags">
+  <div class="section-label">09 — Hashtag Bank</div>
+  <div class="hashtag-bank">
+    <div class="ht primary">#LVUX</div><div class="ht primary">#LasVegasUX</div><div class="ht primary">#lvuxdesign</div>
+    <div class="ht secondary">#UXDesign</div><div class="ht secondary">#UXResearch</div><div class="ht secondary">#UXMeetup</div><div class="ht secondary">#UXCommunity</div><div class="ht secondary">#UserExperience</div>
+    <div class="ht">#ProductDesign</div><div class="ht">#DesignThinking</div><div class="ht">#InteractionDesign</div><div class="ht">#UIDesign</div><div class="ht">#DesignSystems</div>
+    <div class="ht">#HumanCenteredDesign</div><div class="ht">#DesignLV</div><div class="ht">#LasVegas</div><div class="ht">#VegasTech</div>
+    <div class="ht">#DesignCommunity</div><div class="ht">#DesignMeetup</div><div class="ht">#PortfolioReview</div><div class="ht">#DesignCareer</div><div class="ht">#FigmaDesign</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="logo-svg sz-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.8 100.8"><use href="#lvux-icon"/></svg></div>
+  <div class="footer-brand">LVUX — LAS VEGAS UX MEETUP</div>
+  <div class="footer-note">Brand Playbook · Full Social Kit · 2026</div>
+</div>
+
+<script>
+function downloadPost(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const filename = el.dataset.filename || 'lvux-post';
+  const btn = el.parentElement.querySelector('.dl-btn');
+  if (btn) { btn.textContent = 'Preparing...'; btn.disabled = true; }
+
+  html2canvas(el, {
+    scale: 3,
+    useCORS: true,
+    allowTaint: false,
+    backgroundColor: '#000',
+    logging: false,
+    imageTimeout: 8000,
+    onclone: (doc) => {
+      // Ensure all images in the clone are visible
+      doc.querySelectorAll('img').forEach(img => {
+        img.style.opacity = '1';
+      });
+    }
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = filename + '.png';
+    link.href = canvas.toDataURL('image/png', 1.0);
+    link.click();
+    if (btn) { btn.textContent = '↓ Download PNG'; btn.disabled = false; }
+  }).catch(err => {
+    console.error('Download error:', err);
+    if (btn) { btn.textContent = 'Right-click → Save Image'; btn.disabled = false; }
+  });
+}
+</script>
+</body>
+</html>
